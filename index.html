@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial AI for Migrant Workers - Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            width: 100%;
+            max-width: 1200px;
+            height: 90vh;
+            max-height: 700px;
+            position: relative;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: none;
+            padding: 60px;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Navigation */
+        .nav-controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Title Slide */
+        #slide-title {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        #slide-title h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        #slide-title h2 {
+            font-size: 2em;
+            font-weight: 300;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        #slide-title .team {
+            font-size: 1.3em;
+            opacity: 0.8;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Slide 1: The Problem */
+        #slide1 {
+            background: #2C3E50;
+            color: white;
+        }
+
+        .problem-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
+        }
+
+        .problem-title {
+            font-size: 3em;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        .chatbot-fail {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 2px solid rgba(231, 76, 60, 0.5);
+            position: relative;
+        }
+
+        .chatbot-fail::before {
+            content: "❌";
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            font-size: 2em;
+        }
+
+        .chat-message {
+            background: rgba(255,255,255,0.15);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.4em;
+            margin-top: 30px;
+            padding: 20px;
+            border-left: 4px solid #e74c3c;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .quote-attribution {
+            text-align: right;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+
+        /* Slide 2: The Breakthrough */
+        #slide2 {
+            background: white;
+        }
+
+        .breakthrough-title {
+            font-size: 3em;
+            color: #2C3E50;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .approach-comparison {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 70%;
+        }
+
+        .approach {
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            flex: 1;
+            margin: 0 20px;
+        }
+
+        .approach:hover {
+            transform: scale(1.05);
+        }
+
+        .old-approach {
+            background: #FFEBEE;
+            border: 3px solid #e74c3c;
+        }
+
+        .new-approach {
+            background: #E8F5E9;
+            border: 3px solid #27AE60;
+        }
+
+        .approach h3 {
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+
+        .old-approach h3 {
+            color: #e74c3c;
+        }
+
+        .new-approach h3 {
+            color: #27AE60;
+        }
+
+        .approach-questions {
+            font-size: 1.3em;
+            line-height: 2;
+            color: #2C3E50;
+        }
+
+        .old-approach .approach-questions {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .arrow-transform {
+            font-size: 3em;
+            color: #667eea;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Slide 3: Demo - Onboarding */
+        #slide3 {
+            background: #f8f9fa;
+        }
+
+        .demo-title {
+            font-size: 2.5em;
+            color: #2C3E50;
+            margin-bottom: 30px;
+        }
+
+        .chat-window {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
+            height: 60%;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin: 15px 0;
+            animation: messageSlide 0.5s ease-out;
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .bot-bubble {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 20px 20px 20px 5px;
+            max-width: 70%;
+            display: inline-block;
+        }
+
+        .user-bubble {
+            background: #E8F5E9;
+            color: #2C3E50;
+            padding: 15px 20px;
+            border-radius: 20px 20px 5px 20px;
+            max-width: 70%;
+            display: inline-block;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .message.user {
+            text-align: right;
+        }
+
+        .insight-box {
+            background: #FFF9C4;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .insight-box::before {
+            content: "💡";
+            font-size: 2em;
+        }
+
+        /* Slide 4: Personalized Advice */
+        #slide4 {
+            background: white;
+        }
+
+        .advice-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .advice-title {
+            font-size: 2.5em;
+            color: #2C3E50;
+            margin-bottom: 30px;
+        }
+
+        .personalized-response {
+            background: linear-gradient(135deg, #E3F2FD, #F3E5F5);
+            border-radius: 20px;
+            padding: 40px;
+            flex-grow: 1;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .advice-item {
+            font-size: 1.4em;
+            margin: 25px 0;
+            padding-left: 50px;
+            position: relative;
+            color: #2C3E50;
+            animation: fadeInLeft 0.6s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .advice-item .emoji {
+            position: absolute;
+            left: 0;
+            font-size: 1.5em;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .reality-note {
+            text-align: center;
+            font-size: 1.5em;
+            color: #2C3E50;
+            font-weight: 600;
+            margin-top: 30px;
+        }
+
+        /* Slide 5: Multilingual */
+        #slide5 {
+            background: linear-gradient(135deg, #ffffff 0%, #E3F2FD 100%);
+        }
+
+        .multilingual-title {
+            font-size: 2.5em;
+            color: #2C3E50;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .language-demo {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .language-box {
+            flex: 1;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            min-height: 200px;
+        }
+
+        .language-box h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .mixed-input {
+            font-family: 'Courier New', monospace;
+            color: #555;
+            font-size: 1.2em;
+            line-height: 1.8;
+        }
+
+        .bengali-output {
+            font-size: 1.4em;
+            color: #2C3E50;
+            line-height: 2;
+        }
+
+        .language-arrow {
+            font-size: 3em;
+            color: #667eea;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .language-insight {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 1.3em;
+            color: #2C3E50;
+            background: rgba(255,255,255,0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /* Slide 6: Multi-platform */
+        #slide6 {
+            background: white;
+        }
+
+        .platform-title {
+            font-size: 2.5em;
+            color: #2C3E50;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .platforms-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .platform-mock {
+            flex: 1;
+            text-align: center;
+        }
+
+        .phone-frame {
+            width: 250px;
+            height: 500px;
+            background: #000;
+            border-radius: 30px;
+            padding: 10px;
+            margin: 0 auto 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .app-header {
+            padding: 15px;
+            font-weight: 600;
+            border-bottom: 1px solid #eee;
+        }
+
+        .whatsapp-header {
+            background: #075E54;
+            color: white;
+        }
+
+        .telegram-header {
+            background: #0088cc;
+            color: white;
+        }
+
+        .chat-area {
+            flex: 1;
+            padding: 15px;
+            background: #E5DDD5;
+        }
+
+        .telegram-area {
+            background: #e5e5ea;
+        }
+
+        .mini-message {
+            padding: 8px 12px;
+            border-radius: 10px;
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        .features-list {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .feature {
+            color: #27AE60;
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        /* Slide 7: Impact */
+        #slide7 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .impact-title {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .impact-comparison {
+            display: flex;
+            justify-content: space-around;
+            gap: 40px;
+        }
+
+        .impact-column {
+            flex: 1;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .before-column {
+            border: 3px solid rgba(231, 76, 60, 0.8);
+        }
+
+        .after-column {
+            border: 3px solid rgba(39, 174, 96, 0.8);
+        }
+
+        .impact-column h3 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .impact-item {
+            margin: 20px 0;
+            font-size: 1.2em;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+
+        .before-column .impact-item {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .impact-tagline {
+            text-align: center;
+            font-size: 2em;
+            margin-top: 40px;
+            font-weight: 600;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Title Slide -->
+        <div class="slide active" id="slide-title">
+            <h1>Personalizing Financial AI</h1>
+            <h2>for Migrant Workers</h2>
+            <div class="team">Caroline • Wooz • Alex • Gigi<br>with Selvan</div>
+        </div>
+<!-- Slide 2: Who We're Building For -->
+<div class="slide" id="slide1">
+    <div class="problem-container">
+        <h2 class="problem-title">Who We're Building For</h2>
+        <div style="display: flex; justify-content: space-around; margin-bottom: 30px;">
+            <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                <div style="font-size: 2.5em; font-weight: bold;">300,000+</div>
+                <div style="opacity: 0.9;">Workers in Singapore</div>
+            </div>
+            <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                <div style="font-size: 2.5em; font-weight: bold;">$6.8-10K</div>
+                <div style="opacity: 0.9;">Recruitment debt</div>
+            </div>
+            <div style="text-align: center; background: rgba(231, 76, 60, 0.3); padding: 20px; border-radius: 10px;">
+                <div style="font-size: 2.5em; font-weight: bold;">66%</div>
+                <div style="opacity: 0.9;">Have ZERO savings</div>
+            </div>
+        </div>
+        <div class="quote">
+            "It told me to save $50, but after I send money home and pay for food and transport, I don't even have that much left. It makes no sense."
+            <div class="quote-attribution">— Construction worker, 1-2 days off/month</div>
+        </div>
+    </div>
+</div>
+        <!-- Slide 1: The Problem -->
+        <div class="slide" id="slide1">
+            <div class="problem-container">
+                <h2 class="problem-title">Why Generic Financial Advice Fails</h2>
+                <div class="chatbot-fail">
+                    <div class="chat-message bot-message">
+                        Bot: "You should save $50 this month"
+                    </div>
+                </div>
+                <div class="quote">
+                    "It told me to save $50, but after I send money home and pay for food and transport, I don't even have that much left. It makes no sense."
+                    <div class="quote-attribution">— Migrant worker, Focus Group</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Breakthrough -->
+        <div class="slide" id="slide2">
+            <h2 class="breakthrough-title">What If We Asked Different Questions?</h2>
+            <div class="approach-comparison">
+                <div class="approach old-approach">
+                    <h3>❌ OLD APPROACH</h3>
+                    <div class="approach-questions">
+                        "What's your monthly income?"<br>
+                        "How much do you spend?"
+                    </div>
+                </div>
+                <div class="arrow-transform">→</div>
+                <div class="approach new-approach">
+                    <h3>✅ NEW APPROACH</h3>
+                    <div class="approach-questions">
+                        "What are you dreaming of?"<br>
+                        "What do you want to achieve?"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Live Demo - Onboarding -->
+        <div class="slide" id="slide3">
+            <h2 class="demo-title">Dream-First Onboarding</h2>
+            <div class="chat-window">
+                <div class="message">
+                    <div class="bot-bubble">Welcome! What are you working toward? What's your dream?</div>
+                </div>
+                <div class="message user">
+                    <div class="user-bubble">I want to buy motorcycle, go home see my family</div>
+                </div>
+                <div class="message">
+                    <div class="bot-bubble">That's beautiful. To help you reach it, I need to understand your situation...<br><br>
+                    • How much do you earn?<br>
+                    • Do you send money home?<br>
+                    • Any debts or loans?<br>
+                    • Monthly expenses?</div>
+                </div>
+            </div>
+            <div class="insight-box">
+                We're not giving advice yet—we're building a complete picture first
+            </div>
+        </div>
+
+        <!-- Slide 4: Personalized Advice -->
+        <div class="slide" id="slide4">
+            <div class="advice-container">
+                <h2 class="advice-title">Advice Tailored to Reality</h2>
+                <div class="personalized-response">
+                    <div class="advice-item">
+                        <span class="emoji">💰</span>
+                        After remittances (<span class="highlight">$300</span>) and expenses, you have <span class="highlight">$150</span> left
+                    </div>
+                    <div class="advice-item">
+                        <span class="emoji">🏍️</span>
+                        If you save <span class="highlight">$100/month</span>, you'll reach your motorcycle down payment in <span class="highlight">8 months</span>
+                    </div>
+                    <div class="advice-item">
+                        <span class="emoji">📊</span>
+                        Food is your biggest flexible expense (<span class="highlight">$80</span>)—small changes here could speed this up
+                    </div>
+                </div>
+                <div class="reality-note">
+                    Same worker. Same income.<br>
+                    But advice grounded in HIS reality.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Multilingual Magic -->
+        <div class="slide" id="slide5">
+            <h2 class="multilingual-title">Speaking Their Language—Literally</h2>
+            <div class="language-demo">
+                <div class="language-box">
+                    <h3>WORKER TYPES:</h3>
+                    <div class="mixed-input">
+                        "taka save korbo<br>
+                        emon ki bhabe"<br><br>
+                        (Mixed Bengali/English)
+                    </div>
+                </div>
+                <div class="language-arrow">⟷</div>
+                <div class="language-box">
+                    <h3>BOT RESPONDS:</h3>
+                    <div class="bengali-output">
+                        আপনার স্বপ্ন<br>
+                        অর্জনের জন্য...<br><br>
+                        (Proper Bengali script)
+                    </div>
+                </div>
+            </div>
+            <div class="language-insight">
+                <strong>Workers type CASUALLY</strong> (mixed, romanized)<br>
+                But want to <strong>READ with RESPECT</strong> (proper script)<br><br>
+                <em>Built by Alex using multilingual LLM engine</em>
+            </div>
+        </div>
+
+        
+
+        <!-- Slide 6: Multi-platform -->
+        <div class="slide" id="slide6">
+            <h2 class="platform-title">Meet Them Where They Are</h2>
+            <div class="platforms-container">
+                <div class="platform-mock">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="app-header whatsapp-header">WhatsApp</div>
+                            <div class="chat-area">
+                                <div class="mini-message" style="background: #DCF8C6;">Voice message support</div>
+                                <div class="mini-message" style="background: white;">Text when commuting</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="features-list">
+                        <div class="feature">✓ Universal adoption</div>
+                        <div class="feature">✓ Voice messages</div>
+                        <div class="feature">✓ Familiar interface</div>
+                    </div>
+                </div>
+                <div class="platform-mock">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="app-header telegram-header">Telegram</div>
+                            <div class="chat-area telegram-area">
+                                <div class="mini-message" style="background: white;">Quick button responses</div>
+                                <div class="mini-message" style="background: #3390ec; color: white;">Interactive menus</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="features-list">
+                        <div class="feature">✓ 66.7% preferred</div>
+                        <div class="feature">✓ Better buttons</div>
+                        <div class="feature">✓ Faster iteration</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slide 5: Multilingual Demo -->
+<div class="slide" id="slide5">
+    <h2 class="multilingual-title">🌍 Live Demo: Language That Respects</h2>
+    <div style="display: flex; gap: 30px; align-items: flex-start;">
+        <!-- Chat Demo -->
+        <div style="flex: 1.5; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden;">
+            <div style="background: #25D366; color: white; padding: 15px; font-weight: 600;">
+                Raj's Phone • Bengali Worker
+            </div>
+            <div style="padding: 20px; background: #E5DDD5;">
+                <div style="text-align: right; margin: 15px 0;">
+                    <span style="background: #DCF8C6; padding: 12px 18px; border-radius: 18px 18px 4px 18px; display: inline-block;">
+                        ami taka save korte chai<br>
+                        <small style="color: #666; font-style: italic;">(I want to save money)</small>
+                    </span>
+                </div>
+                <div style="margin: 15px 0;">
+                    <span style="background: white; padding: 12px 18px; border-radius: 18px 18px 18px 4px; display: inline-block; font-size: 1.1em;">
+                        আপনার স্বপ্ন কী? কিসের জন্য সঞ্চয়?<br>
+                        <small style="color: #666;">(What's your dream? What are you saving for?)</small>
+                    </span>
+                </div>
+                <div style="text-align: right; margin: 15px 0;">
+                    <span style="background: #DCF8C6; padding: 12px 18px; border-radius: 18px 18px 4px 18px; display: inline-block;">
+                        ghar banaite 2 lakh taka<br>
+                        <small style="color: #666; font-style: italic;">(Build house, 2 lakh taka)</small>
+                    </span>
+                </div>
+                <div style="margin: 15px 0;">
+                    <span style="background: white; padding: 12px 18px; border-radius: 18px 18px 18px 4px; display: inline-block;">
+                        বুঝেছি। হিসাব করি:<br>
+                        🏠 লক্ষ্য: ২ লক্ষ টাকা<br>
+                        💰 মাসিক: ৫,০০০ টাকা<br>
+                        📅 সময়: ৪০ মাস
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Innovation Box -->
+        <div style="flex: 1;">
+            <div style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <h3 style="color: #667eea; margin-bottom: 20px;">🎯 The Innovation</h3>
+                <div style="margin: 15px 0; padding: 10px; background: #F8F9FA; border-radius: 10px;">
+                    <span style="font-size: 1.2em;">🗣️</span> Accepts romanized text, voice notes
+                </div>
+                <div style="margin: 15px 0; padding: 10px; background: #F8F9FA; border-radius: 10px;">
+                    <span style="font-size: 1.2em;">🔤</span> Bengali, Tamil, Hindi + English mix
+                </div>
+                <div style="margin: 15px 0; padding: 10px; background: #F8F9FA; border-radius: 10px;">
+                    <span style="font-size: 1.2em;">📝</span> Responds in proper native script
+                </div>
+                <div style="margin-top: 25px; padding: 20px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 10px; text-align: center; color: white;">
+                    <div style="font-size: 2.5em; font-weight: bold;">xx%? to clarify</div>
+                    <div>prefer mother tongue for money decisions</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="language-insight" style="margin-top: 30px;">
+        💡 <strong>Key Insight:</strong> Proper script = <strong>RESPECT</strong> and <strong>TRUST</strong>
+    </div>
+</div>
+        <!-- Slide 7: The Impact -->
+        <div class="slide" id="slide7">
+            <h2 class="impact-title">From Generic to Personal</h2>
+            <div class="impact-comparison">
+                <div class="impact-column before-column">
+                    <h3>❌ BEFORE</h3>
+                    <div class="impact-item">"Save 20% of your income"</div>
+                    <div class="impact-item">One-size-fits-all</div>
+                    <div class="impact-item">Western models</div>
+                    <div class="impact-item">Deleted within days</div>
+                </div>
+                <div class="impact-column after-column">
+                    <h3>✅ AFTER</h3>
+                    <div class="impact-item">"You're 28% toward your motorcycle"</div>
+                    <div class="impact-item">Dream-focused</div>
+                    <div class="impact-item">Collectivist frameworks</div>
+                    <div class="impact-item">Actually used</div>
+                </div>
+            </div>
+            <div class="impact-tagline">
+                The chatbot becomes a partner, not a lecturer
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Panel Discussion Setup -->
+<!-- Slide 8: Panel Discussion Setup -->
+<div class="slide" id="slide8">
+    <div style="background: white; height: 100%;">
+        <h2 style="font-size: 2.5em; color: #2C3E50; text-align: center; margin-bottom: 40px; padding-top: 20px;">Let's Continue the Conversation</h2>
+        
+        <!-- Journey So Far -->
+        <div style="display: flex; justify-content: center; margin-bottom: 40px;">
+            <div style="display: flex; align-items: center; gap: 30px;">
+                <div style="text-align: center;">
+                    <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">
+                        <span style="font-size: 2em; color: white;">1</span>
+                    </div>
+                    <strong style="color: #667eea;">Research</strong><br>
+                    <small>3 months<br>12 workers</small>
+                </div>
+                <div style="color: #667eea; font-size: 2em;">→</div>
+                <div style="text-align: center;">
+                    <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">
+                        <span style="font-size: 2em; color: white;">2</span>
+                    </div>
+                    <strong style="color: #667eea;">Co-create</strong><br>
+                    <small>Built WITH<br>not FOR</small>
+                </div>
+                <div style="color: #667eea; font-size: 2em;">→</div>
+                <div style="text-align: center;">
+                    <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">
+                        <span style="font-size: 2em; color: white;">3</span>
+                    </div>
+                    <strong style="color: #667eea;">Prototype</strong><br>
+                    <small>MVP ready<br>for testing</small>
+                </div>
+                <div style="color: #667eea; font-size: 2em;">→</div>
+                <div style="text-align: center;">
+                    <div style="width: 80px; height: 80px; border-radius: 50%; background: #FFF9C4; border: 3px solid #667eea; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">
+                        <span style="font-size: 2em; color: #667eea;">?</span>
+                    </div>
+                    <strong style="color: #667eea;">Next?</strong><br>
+                    <small>Let's discuss<br>together</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Insights to Discuss -->
+        <div style="background: linear-gradient(135deg, #E3F2FD, #F3E5F5); padding: 30px; border-radius: 20px; margin-bottom: 30px;">
+            <h3 style="color: #2C3E50; margin-bottom: 25px; font-size: 1.4em;">Three Surprising Insights to Explore:</h3>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                <div style="background: white; padding: 20px; border-radius: 12px;">
+                    <div style="font-size: 1.8em; margin-bottom: 10px;">🎭</div>
+                    <strong style="color: #667eea;">The Script Paradox</strong><br>
+                    <small>Workers type casually but want responses in formal native script for respect</small>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 12px;">
+                    <div style="font-size: 1.8em; margin-bottom: 10px;">📊</div>
+                    <strong style="color: #667eea;">Same Workplace, Different Worlds</strong><br>
+                    <small>Two workers at SMU had vastly different financial realities</small>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 12px;">
+                    <div style="font-size: 1.8em; margin-bottom: 10px;">🔐</div>
+                    <strong style="color: #667eea;">Trust vs Privacy</strong><br>
+                    <small>Workers want personalization but fear data misuse</small>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Panel Transition -->
+        <div style="text-align: center; padding: 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 15px;">
+            <div style="font-size: 1.8em; margin-bottom: 10px;">Join our panel discussion:</div>
+            <strong style="font-size: 1.4em;">"Peaks and Troughs Towards the Wider Community"</strong>
+            <div style="margin-top: 15px; opacity: 0.9;">
+                <strong>Panelists:</strong> Caroline & Alex (Researchers) • Selvan (Community Partner)<br>
+                <strong>Moderated by:</strong> Andrew
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Navigation Controls -->
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+        <div class="slide-counter">
+            <span id="currentSlide">1</span> / <span id="totalSlides">8</span>
+        </div>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            if (n >= totalSlides) currentSlide = 0;
+            if (n < 0) currentSlide = totalSlides - 1;
+            
+            slides[currentSlide].classList.add('active');
+            document.getElementById('currentSlide').textContent = currentSlide + 1;
+            
+            // Update button states
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function changeSlide(n) {
+            currentSlide += n;
+            showSlide(currentSlide);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+            if (e.key === ' ') {
+                e.preventDefault();
+                changeSlide(1);
+            }
+        });
+
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) changeSlide(1);  // Swipe left
+            if (touchEndX > touchStartX + 50) changeSlide(-1); // Swipe right
+        }
+
+        // Initialize
+        showSlide(0);
+
+        // Animate chat messages on slide 3
+        let messageIndex = 0;
+        const messages = document.querySelectorAll('#slide3 .message');
+        
+        function animateChat() {
+            if (!slides[2].classList.contains('active')) return;
+            
+            messages.forEach((msg, i) => {
+                setTimeout(() => {
+                    msg.style.display = 'block';
+                }, i * 800);
+            });
+        }
+
+        // Watch for slide 3 becoming active
+        const observer = new MutationObserver(() => {
+            if (slides[2].classList.contains('active')) {
+                animateChat();
+            }
+        });
+
+        observer.observe(slides[2], { attributes: true, attributeFilter: ['class'] });
+    </script>
+</body>
+</html>
