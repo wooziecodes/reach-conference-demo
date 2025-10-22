@@ -38,7 +38,7 @@
             width: 100%;
             height: 100%;
             display: none;
-            padding: 60px;
+            padding: 50px;
             animation: slideIn 0.6s ease-out;
         }
 
@@ -61,14 +61,13 @@
         /* Navigation */
         .nav-controls {
             position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: 20px;
+            right: 20px;
             display: flex;
-            gap: 20px;
+            gap: 15px;
             z-index: 1000;
             background: rgba(255,255,255,0.95);
-            padding: 15px 25px;
+            padding: 10px 20px;
             border-radius: 50px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
@@ -652,75 +651,95 @@
     <div class="presentation-container">
         <!-- Title Slide -->
         <div class="slide active" id="slide-title">
-            <h1>Personalizing Financial AI</h1>
-            <h2>for Migrant Workers</h2>
-            <div class="team">Caroline • Wooz • Alex • Gigi<br>with Selvan</div>
+            <h1>💰 Financial AI</h1>
+            <h2>Building for Migrant Workers</h2>
+            <div class="team">Caroline & Alex | Tech Demo → Panel Discussion</div>
         </div>
-<!-- Slide 2: Who We're Building For -->
+<!-- Slide 1: The Technical Trap We Fell Into -->
 <div class="slide" id="slide1">
     <div class="problem-container">
-        <h2 class="problem-title">Who We're Building For</h2>
-        <div style="display: flex; justify-content: space-around; margin-bottom: 30px;">
-            <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
-                <div style="font-size: 2.5em; font-weight: bold;">300,000+</div>
-                <div style="opacity: 0.9;">Workers in Singapore</div>
-            </div>
-            <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
-                <div style="font-size: 2.5em; font-weight: bold;">$6.8-10K</div>
-                <div style="opacity: 0.9;">Recruitment debt</div>
-            </div>
-            <div style="text-align: center; background: rgba(231, 76, 60, 0.3); padding: 20px; border-radius: 10px;">
-                <div style="font-size: 2.5em; font-weight: bold;">66%</div>
-                <div style="opacity: 0.9;">Have ZERO savings</div>
+        <h2 class="problem-title">The Technical Trap We Fell Into</h2>
+        
+        <div class="chatbot-fail">
+            <div style="font-size: 1.3em; margin-bottom: 15px; font-weight: 600;">We'll be honest — typical tech hubris:</div>
+            <div style="font-size: 1.1em; line-height: 1.6;">
+                "Slap GPT-4 on it, write a prompt, ship it."
             </div>
         </div>
+
+        <div class="chat-message bot-message">
+            <strong>Our First Version:</strong> "Save $50 this month"
+        </div>
+        <div style="text-align: center; margin: 15px 0; font-size: 1.2em; opacity: 0.7;">
+            ↓ Technically impressive, instant personalized advice ↓
+        </div>
+        <div class="chat-message bot-message">
+            <strong>But completely disconnected...</strong>
+        </div>
+
         <div class="quote">
-            "It told me to save $50, but after I send money home and pay for food and transport, I don't even have that much left. It makes no sense."
-            <div class="quote-attribution">— Construction worker, 1-2 days off/month</div>
+            "After I send money home and pay for food and transport, I don't even have that much left."
+            <div class="quote-attribution">— Worker feedback</div>
+        </div>
+
+        <div style="margin-top: auto; padding-top: 20px; font-size: 1.2em; text-align: center; color: #e74c3c; font-weight: 600;">
+            We optimized for technical elegance but built for the wrong model:<br>
+            Individual optimization when we should have designed for collectivist family systems
         </div>
     </div>
 </div>
-        <!-- Slide 1: The Problem -->
-        <div class="slide" id="slide1">
-            <div class="problem-container">
-                <h2 class="problem-title">Why Generic Financial Advice Fails</h2>
-                <div class="chatbot-fail">
-                    <div class="chat-message bot-message">
-                        Bot: "You should save $50 this month"
-                    </div>
-                </div>
-                <div class="quote">
-                    "It told me to save $50, but after I send money home and pay for food and transport, I don't even have that much left. It makes no sense."
-                    <div class="quote-attribution">— Migrant worker, Focus Group</div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Slide 2: The Breakthrough -->
+        <!-- Slide 2: Three Technical Realizations -->
         <div class="slide" id="slide2">
-            <h2 class="breakthrough-title">What If We Asked Different Questions?</h2>
-            <div class="approach-comparison">
-                <div class="approach old-approach">
-                    <h3>❌ OLD APPROACH</h3>
-                    <div class="approach-questions">
-                        "What's your monthly income?"<br>
-                        "How much do you spend?"
+            <h2 class="breakthrough-title" style="font-size: 2.3em; margin-bottom: 18px;">What Actually Required Building</h2>
+            <div style="display: grid; gap: 16px; flex: 1;">
+                <div style="background: linear-gradient(135deg, #F8F9FA, #FFF); border-left: 6px solid #667eea; border-radius: 12px; padding: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                    <h3 style="color: #667eea; font-size: 1.3em; margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">
+                        <span style="display: inline-flex; width: 34px; height: 34px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 50%; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1em;">1</span>
+                        Context Before Capability
+                    </h3>
+                    <div style="color: #2C3E50; font-size: 0.95em; line-height: 1.4; margin-top: 6px;">
+                        Rebuilt with comprehensive onboarding: family obligations, debt schedules, remittance patterns BEFORE any LLM-generated advice.
+                    </div>
+                    <div style="margin-top: 8px; padding: 8px 10px; background: #FFF9C4; border-radius: 6px; font-size: 0.85em; color: #666;">
+                        💡 Abandoned "instant advice" for slower, deeper approach — meant rethinking our entire UX model
                     </div>
                 </div>
-                <div class="arrow-transform">→</div>
-                <div class="approach new-approach">
-                    <h3>✅ NEW APPROACH</h3>
-                    <div class="approach-questions">
-                        "What are you dreaming of?"<br>
-                        "What do you want to achieve?"
+
+                <div style="background: linear-gradient(135deg, #F8F9FA, #FFF); border-left: 6px solid #667eea; border-radius: 12px; padding: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                    <h3 style="color: #667eea; font-size: 1.3em; margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">
+                        <span style="display: inline-flex; width: 34px; height: 34px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 50%; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1em;">2</span>
+                        The Language Asymmetry
+                    </h3>
+                    <div style="color: #2C3E50; font-size: 0.95em; line-height: 1.4; margin-top: 6px;">
+                        Workers typed 'taka save korbo' (mixed Bengali/English) because it's faster. But wanted responses in proper Bengali script, বাংলা
+                    </div>
+                    <div style="margin-top: 8px; padding: 8px 10px; background: #FFF9C4; border-radius: 6px; font-size: 0.85em; color: #666;">
+                        💡 Not a translation problem, a <strong>respect problem</strong>. Breakthrough models enable this, but you can't just API-call cultural context
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #F8F9FA, #FFF); border-left: 6px solid #667eea; border-radius: 12px; padding: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                    <h3 style="color: #667eea; font-size: 1.3em; margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">
+                        <span style="display: inline-flex; width: 34px; height: 34px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 50%; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1em;">3</span>
+                        Multimodality is Fundamental
+                    </h3>
+                    <div style="color: #2C3E50; font-size: 0.95em; line-height: 1.4; margin-top: 6px;">
+                        100% of workers chose 'both' voice and text, not either/or. Voice while working, text when reviewing budgets.
+                    </div>
+                    <div style="margin-top: 8px; padding: 8px 10px; background: #FFF9C4; border-radius: 6px; font-size: 0.85em; color: #666;">
+                        💡 Context determines preference, not user surveys — changes how we design interfaces
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 3: Live Demo - Onboarding -->
+        <!-- Slide 3: Live Demo - Context Before Capability -->
         <div class="slide" id="slide3">
-            <h2 class="demo-title">Dream-First Onboarding</h2>
+            <h2 class="demo-title">Demo: Context Before Capability</h2>
+            <div style="font-size: 1.2em; color: #667eea; margin-bottom: 30px; font-style: italic; text-align: center;">
+                Building a complete picture FIRST
+            </div>
             <div class="chat-window">
                 <div class="message">
                     <div class="bot-bubble">Welcome! What are you working toward? What's your dream?</div>
@@ -737,14 +756,15 @@
                 </div>
             </div>
             <div class="insight-box">
-                We're not giving advice yet—we're building a complete picture first
+                <strong>NOT giving advice yet</strong> — just building understanding<br>
+                <em style="font-size: 0.9em; opacity: 0.8;">Research insight: Co-design taught us that respectful AI starts with listening, not advice-giving</em>
             </div>
         </div>
 
-        <!-- Slide 4: Personalized Advice -->
+        <!-- Slide 4: Advice Grounded in Reality -->
         <div class="slide" id="slide4">
             <div class="advice-container">
-                <h2 class="advice-title">Advice Tailored to Reality</h2>
+                <h2 class="advice-title">Same Worker, Same Income — Different Advice</h2>
                 <div class="personalized-response">
                     <div class="advice-item">
                         <span class="emoji">💰</span>
@@ -756,245 +776,156 @@
                     </div>
                     <div class="advice-item">
                         <span class="emoji">📊</span>
-                        Food is your biggest flexible expense (<span class="highlight">$80</span>)—small changes here could speed this up
+                        Food is your biggest flexible expense (<span class="highlight">$85</span>)—small changes here could speed this up
                     </div>
                 </div>
                 <div class="reality-note">
-                    Same worker. Same income.<br>
-                    But advice grounded in HIS reality.
+                    From "Save 20%" to understanding his collectivist obligations<br>
+                    Advice grounded in HIS reality.
                 </div>
             </div>
         </div>
 
-        <!-- Slide 5: Multilingual Magic -->
+        <!-- Slide 5: The Language Asymmetry -->
         <div class="slide" id="slide5">
-            <h2 class="multilingual-title">Speaking Their Language—Literally</h2>
+            <h2 class="multilingual-title">The Language Asymmetry</h2>
+            <div style="font-size: 1.2em; color: #e74c3c; margin-bottom: 30px; font-weight: 600; text-align: center;">
+                Not a translation problem — a respect problem
+            </div>
             <div class="language-demo">
                 <div class="language-box">
-                    <h3>WORKER TYPES:</h3>
+                    <h3>WORKER TYPES (Casual):</h3>
                     <div class="mixed-input">
                         "taka save korbo<br>
                         emon ki bhabe"<br><br>
                         (Mixed Bengali/English)
                     </div>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(102, 126, 234, 0.1); border-radius: 8px; font-size: 0.9em;">
+                        <strong>Why?</strong> Faster to type on their phones
+                    </div>
                 </div>
                 <div class="language-arrow">⟷</div>
                 <div class="language-box">
-                    <h3>BOT RESPONDS:</h3>
+                    <h3>BOT RESPONDS (Proper Script):</h3>
                     <div class="bengali-output">
-                        আপনার স্বপ্ন<br>
-                        অর্জনের জন্য...<br><br>
-                        (Proper Bengali script)
+                        আপনার স্বপ্ন কী?<br><br>
+                        (What's your dream?)
+                    </div>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(76, 175, 80, 0.1); border-radius: 8px; font-size: 0.9em;">
+                        <strong>Why?</strong> Shows respect for their language
                     </div>
                 </div>
             </div>
             <div class="language-insight">
-                <strong>Workers type CASUALLY</strong> (mixed, romanized)<br>
-                But want to <strong>READ with RESPECT</strong> (proper script)<br><br>
-                <em>Built by Alex using multilingual LLM engine</em>
+                <div style="background: rgba(255, 249, 196, 0.5); padding: 15px; border-radius: 10px; margin-top: 20px; border-left: 4px solid #F57C00;">
+                    <em>"It feels more respectful when I see my language properly written."</em><br>
+                    <small style="opacity: 0.8;">— Worker feedback on proper script</small>
+                </div>
+                <div style="margin-top: 20px; padding: 15px; background: white; border-radius: 10px; border: 2px solid #667eea; text-align: center;">
+                    <strong style="font-size: 1.2em; color: #667eea;">100% of workers chose 'both' voice AND text</strong><br>
+                    <small style="color: #666;">Breakthrough models (Sarvam-1, Sahabat-AI) enable this, but design choices matter more than model capabilities</small>
+                </div>
             </div>
         </div>
 
-        
-
-        <!-- Slide 6: Multi-platform -->
+                <!-- Slide 6: The One Technical Reality -->
         <div class="slide" id="slide6">
-            <h2 class="platform-title">Meet Them Where They Are</h2>
-            <div class="platforms-container">
-                <div class="platform-mock">
-                    <div class="phone-frame">
-                        <div class="phone-screen">
-                            <div class="app-header whatsapp-header">WhatsApp</div>
-                            <div class="chat-area">
-                                <div class="mini-message" style="background: #DCF8C6;">Voice message support</div>
-                                <div class="mini-message" style="background: white;">Text when commuting</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="features-list">
-                        <div class="feature">✓ Universal adoption</div>
-                        <div class="feature">✓ Voice messages</div>
-                        <div class="feature">✓ Familiar interface</div>
+            <div style="background: linear-gradient(135deg, #2C3E50, #34495E); color: white; height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 50px; margin: -50px;">
+                <h2 style="font-size: 2.6em; margin-bottom: 25px; text-align: center;">The One Technical Reality</h2>
+                
+                <div style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 22px; margin: 12px 0; border: 2px solid rgba(102, 126, 234, 0.5); font-size: 1.2em; line-height: 1.6;">
+                    Marginalized communities <strong>expect and deserve</strong> the same quality as anyone else.
+                </div>
+
+                <div style="background: rgba(231, 76, 60, 0.2); padding: 20px; border-radius: 12px; margin: 15px 0; border-left: 5px solid #e74c3c;">
+                    <h3 style="font-size: 1.3em; margin-bottom: 12px; color: #e74c3c;">⏱️ The Latency Problem</h3>
+                    <div style="font-size: 1.05em; line-height: 1.6;">
+                        A 10-15 second delay processing voice isn't just latency —<br>
+                        It's a worker on lunch break <strong>giving up</strong> because the tool doesn't respect their time.
                     </div>
                 </div>
-                <div class="platform-mock">
-                    <div class="phone-frame">
-                        <div class="phone-screen">
-                            <div class="app-header telegram-header">Telegram</div>
-                            <div class="chat-area telegram-area">
-                                <div class="mini-message" style="background: white;">Quick button responses</div>
-                                <div class="mini-message" style="background: #3390ec; color: white;">Interactive menus</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="features-list">
-                        <div class="feature">✓ 66.7% preferred</div>
-                        <div class="feature">✓ Better buttons</div>
-                        <div class="feature">✓ Faster iteration</div>
-                    </div>
+
+                <div style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 22px; margin: 15px 0 12px; border: 2px solid rgba(102, 126, 234, 0.5); font-size: 1.2em; line-height: 1.6;">
+                    Technical excellence for marginalized communities isn't charity.<br>
+                    It's <strong>baseline respect</strong>.
+                </div>
+
+                <div style="margin-top: 25px; text-align: center; font-size: 1.6em; font-weight: 600; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 12px; border: 2px solid #667eea;">
+                    You can't API-call your way to equity.
                 </div>
             </div>
         </div>
 
 
-        <!-- Slide 5: Multilingual Demo -->
-<div class="slide" id="slide5">
-    <h2 class="multilingual-title">🌍 Live Demo: Language That Respects</h2>
-    <div style="display: flex; gap: 30px; align-items: flex-start;">
-        <!-- Chat Demo -->
-        <div style="flex: 1.5; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden;">
-            <div style="background: #25D366; color: white; padding: 15px; font-weight: 600;">
-                Raj's Phone • Bengali Worker
-            </div>
-            <div style="padding: 20px; background: #E5DDD5;">
-                <div style="text-align: right; margin: 15px 0;">
-                    <span style="background: #DCF8C6; padding: 12px 18px; border-radius: 18px 18px 4px 18px; display: inline-block;">
-                        ami taka save korte chai<br>
-                        <small style="color: #666; font-style: italic;">(I want to save money)</small>
-                    </span>
-                </div>
-                <div style="margin: 15px 0;">
-                    <span style="background: white; padding: 12px 18px; border-radius: 18px 18px 18px 4px; display: inline-block; font-size: 1.1em;">
-                        আপনার স্বপ্ন কী? কিসের জন্য সঞ্চয়?<br>
-                        <small style="color: #666;">(What's your dream? What are you saving for?)</small>
-                    </span>
-                </div>
-                <div style="text-align: right; margin: 15px 0;">
-                    <span style="background: #DCF8C6; padding: 12px 18px; border-radius: 18px 18px 4px 18px; display: inline-block;">
-                        ghar banaite 2 lakh taka<br>
-                        <small style="color: #666; font-style: italic;">(Build house, 2 lakh taka)</small>
-                    </span>
-                </div>
-                <div style="margin: 15px 0;">
-                    <span style="background: white; padding: 12px 18px; border-radius: 18px 18px 18px 4px; display: inline-block;">
-                        বুঝেছি। হিসাব করি:<br>
-                        🏠 লক্ষ্য: ২ লক্ষ টাকা<br>
-                        💰 মাসিক: ৫,০০০ টাকা<br>
-                        📅 সময়: ৪০ মাস
-                    </span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Innovation Box -->
-        <div style="flex: 1;">
-            <div style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                <h3 style="color: #667eea; margin-bottom: 20px;">🎯 The Innovation</h3>
-                <div style="margin: 15px 0; padding: 10px; background: #F8F9FA; border-radius: 10px;">
-                    <span style="font-size: 1.2em;">🗣️</span> Accepts romanized text, voice notes
-                </div>
-                <div style="margin: 15px 0; padding: 10px; background: #F8F9FA; border-radius: 10px;">
-                    <span style="font-size: 1.2em;">🔤</span> Bengali, Tamil, Hindi + English mix
-                </div>
-                <div style="margin: 15px 0; padding: 10px; background: #F8F9FA; border-radius: 10px;">
-                    <span style="font-size: 1.2em;">📝</span> Responds in proper native script
-                </div>
-                <div style="margin-top: 25px; padding: 20px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 10px; text-align: center; color: white;">
-                    <div style="font-size: 2.5em; font-weight: bold;">xx%? to clarify</div>
-                    <div>prefer mother tongue for money decisions</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="language-insight" style="margin-top: 30px;">
-        💡 <strong>Key Insight:</strong> Proper script = <strong>RESPECT</strong> and <strong>TRUST</strong>
-    </div>
-</div>
-        <!-- Slide 7: The Impact -->
-        <div class="slide" id="slide7">
-            <h2 class="impact-title">From Generic to Personal</h2>
-            <div class="impact-comparison">
-                <div class="impact-column before-column">
-                    <h3>❌ BEFORE</h3>
-                    <div class="impact-item">"Save 20% of your income"</div>
-                    <div class="impact-item">One-size-fits-all</div>
-                    <div class="impact-item">Western models</div>
-                    <div class="impact-item">Deleted within days</div>
-                </div>
-                <div class="impact-column after-column">
-                    <h3>✅ AFTER</h3>
-                    <div class="impact-item">"You're 28% toward your motorcycle"</div>
-                    <div class="impact-item">Dream-focused</div>
-                    <div class="impact-item">Collectivist frameworks</div>
-                    <div class="impact-item">Actually used</div>
-                </div>
-            </div>
-            <div class="impact-tagline">
-                The chatbot becomes a partner, not a lecturer
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 8: Panel Discussion Setup -->
-<!-- Slide 8: Panel Discussion Setup -->
-<div class="slide" id="slide8">
+    <!-- Slide 7: Panel Discussion Setup -->
+<div class="slide" id="slide7">
     <div style="background: white; height: 100%;">
-        <h2 style="font-size: 2.5em; color: #2C3E50; text-align: center; margin-bottom: 40px; padding-top: 20px;">Let's Continue the Conversation</h2>
+        <h2 style="font-size: 2.2em; color: #2C3E50; text-align: center; margin-bottom: 25px; padding-top: 10px;">Let's Continue the Conversation</h2>
         
         <!-- Journey So Far -->
-        <div style="display: flex; justify-content: center; margin-bottom: 40px;">
-            <div style="display: flex; align-items: center; gap: 30px;">
+        <div style="display: flex; justify-content: center; margin-bottom: 25px;">
+            <div style="display: flex; align-items: center; gap: 20px;">
                 <div style="text-align: center;">
-                    <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">
-                        <span style="font-size: 2em; color: white;">1</span>
+                    <div style="width: 65px; height: 65px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; margin: 0 auto 8px;">
+                        <span style="font-size: 1.6em; color: white;">1</span>
                     </div>
-                    <strong style="color: #667eea;">Research</strong><br>
-                    <small>3 months<br>12 workers</small>
+                    <strong style="color: #667eea; font-size: 0.95em;">Research</strong><br>
+                    <small style="font-size: 0.85em;">3 months<br>12 workers</small>
                 </div>
-                <div style="color: #667eea; font-size: 2em;">→</div>
+                <div style="color: #667eea; font-size: 1.6em;">→</div>
                 <div style="text-align: center;">
-                    <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">
-                        <span style="font-size: 2em; color: white;">2</span>
+                    <div style="width: 65px; height: 65px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; margin: 0 auto 8px;">
+                        <span style="font-size: 1.6em; color: white;">2</span>
                     </div>
-                    <strong style="color: #667eea;">Co-create</strong><br>
-                    <small>Built WITH<br>not FOR</small>
+                    <strong style="color: #667eea; font-size: 0.95em;">Co-create</strong><br>
+                    <small style="font-size: 0.85em;">Built WITH<br>not FOR</small>
                 </div>
-                <div style="color: #667eea; font-size: 2em;">→</div>
+                <div style="color: #667eea; font-size: 1.6em;">→</div>
                 <div style="text-align: center;">
-                    <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">
-                        <span style="font-size: 2em; color: white;">3</span>
+                    <div style="width: 65px; height: 65px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; margin: 0 auto 8px;">
+                        <span style="font-size: 1.6em; color: white;">3</span>
                     </div>
-                    <strong style="color: #667eea;">Prototype</strong><br>
-                    <small>MVP ready<br>for testing</small>
+                    <strong style="color: #667eea; font-size: 0.95em;">Prototype</strong><br>
+                    <small style="font-size: 0.85em;">MVP ready<br>for testing</small>
                 </div>
-                <div style="color: #667eea; font-size: 2em;">→</div>
+                <div style="color: #667eea; font-size: 1.6em;">→</div>
                 <div style="text-align: center;">
-                    <div style="width: 80px; height: 80px; border-radius: 50%; background: #FFF9C4; border: 3px solid #667eea; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">
-                        <span style="font-size: 2em; color: #667eea;">?</span>
+                    <div style="width: 65px; height: 65px; border-radius: 50%; background: #FFF9C4; border: 3px solid #667eea; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px;">
+                        <span style="font-size: 1.6em; color: #667eea;">?</span>
                     </div>
-                    <strong style="color: #667eea;">Next?</strong><br>
-                    <small>Let's discuss<br>together</small>
+                    <strong style="color: #667eea; font-size: 0.95em;">Next?</strong><br>
+                    <small style="font-size: 0.85em;">Let's discuss<br>together</small>
                 </div>
             </div>
         </div>
 
-        <!-- Key Insights to Discuss -->
-        <div style="background: linear-gradient(135deg, #E3F2FD, #F3E5F5); padding: 30px; border-radius: 20px; margin-bottom: 30px;">
-            <h3 style="color: #2C3E50; margin-bottom: 25px; font-size: 1.4em;">Three Surprising Insights to Explore:</h3>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-                <div style="background: white; padding: 20px; border-radius: 12px;">
-                    <div style="font-size: 1.8em; margin-bottom: 10px;">🎭</div>
-                    <strong style="color: #667eea;">The Script Paradox</strong><br>
-                    <small>Workers type casually but want responses in formal native script for respect</small>
+        <!-- Key Questions to Discuss -->
+        <div style="background: linear-gradient(135deg, #E3F2FD, #F3E5F5); padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+            <h3 style="color: #2C3E50; margin-bottom: 15px; font-size: 1.2em;">Questions We'd Love to Explore with You:</h3>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                <div style="background: white; padding: 15px; border-radius: 10px;">
+                    <div style="font-size: 1.5em; margin-bottom: 8px;">🎭</div>
+                    <strong style="color: #667eea; font-size: 0.95em;">The Script Paradox</strong><br>
+                    <small style="font-size: 0.85em;">Workers type casually but want formal responses — what does this tell us about respect in HCI research?</small>
                 </div>
-                <div style="background: white; padding: 20px; border-radius: 12px;">
-                    <div style="font-size: 1.8em; margin-bottom: 10px;">📊</div>
-                    <strong style="color: #667eea;">Same Workplace, Different Worlds</strong><br>
-                    <small>Two workers at SMU had vastly different financial realities</small>
+                <div style="background: white; padding: 15px; border-radius: 10px;">
+                    <div style="font-size: 1.5em; margin-bottom: 8px;">📊</div>
+                    <strong style="color: #667eea; font-size: 0.95em;">Same Workplace, Different Worlds</strong><br>
+                    <small style="font-size: 0.85em;">Two workers at SMU had vastly different financial realities — how do we design for within-group diversity?</small>
                 </div>
-                <div style="background: white; padding: 20px; border-radius: 12px;">
-                    <div style="font-size: 1.8em; margin-bottom: 10px;">🔐</div>
-                    <strong style="color: #667eea;">Trust vs Privacy</strong><br>
-                    <small>Workers want personalization but fear data misuse</small>
+                <div style="background: white; padding: 15px; border-radius: 10px;">
+                    <div style="font-size: 1.5em; margin-bottom: 8px;">🔐</div>
+                    <strong style="color: #667eea; font-size: 0.95em;">Trust vs Privacy</strong><br>
+                    <small style="font-size: 0.85em;">Workers want personalization but fear data misuse — what's the path forward for ethical AI deployment?</small>
                 </div>
             </div>
         </div>
         
         <!-- Panel Transition -->
-        <div style="text-align: center; padding: 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 15px;">
-            <div style="font-size: 1.8em; margin-bottom: 10px;">Join our panel discussion:</div>
-            <strong style="font-size: 1.4em;">"Peaks and Troughs Towards the Wider Community"</strong>
-            <div style="margin-top: 15px; opacity: 0.9;">
+        <div style="text-align: center; padding: 18px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 12px;">
+            <div style="font-size: 1.5em; margin-bottom: 8px;">Panel Discussion:</div>
+            <strong style="font-size: 1.2em;">"Peaks and Troughs Towards the Wider Community"</strong>
+            <div style="margin-top: 10px; opacity: 0.9; font-size: 0.95em;">
                 <strong>Panelists:</strong> Caroline & Alex (Researchers) • Selvan (Community Partner)<br>
                 <strong>Moderated by:</strong> Andrew
             </div>
@@ -1005,7 +936,7 @@
     <div class="nav-controls">
         <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
         <div class="slide-counter">
-            <span id="currentSlide">1</span> / <span id="totalSlides">8</span>
+            <span id="currentSlide">1</span> / <span id="totalSlides">7</span>
         </div>
         <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
     </div>
