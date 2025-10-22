@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial AI for Migrant Workers - 3 Minute Demo</title>
+    <title>Financial AI for Migrant Workers - Condensed</title>
     <style>
         * {
             margin: 0;
@@ -38,7 +38,7 @@
             width: 100%;
             height: 100%;
             display: none;
-            padding: 50px;
+            padding: 60px;
             animation: slideIn 0.6s ease-out;
         }
 
@@ -61,13 +61,14 @@
         /* Navigation */
         .nav-controls {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            gap: 15px;
+            gap: 20px;
             z-index: 1000;
             background: rgba(255,255,255,0.95);
-            padding: 10px 20px;
+            padding: 15px 25px;
             border-radius: 50px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
@@ -102,7 +103,7 @@
             color: #333;
         }
 
-        /* SLIDE 0: TITLE SLIDE */
+        /* Title Slide */
         #slide-title {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -120,8 +121,15 @@
         #slide-title h2 {
             font-size: 2em;
             font-weight: 300;
+            margin-bottom: 40px;
             opacity: 0.9;
             animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        #slide-title .team {
+            font-size: 1.3em;
+            opacity: 0.8;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
         }
 
         @keyframes fadeInUp {
@@ -135,7 +143,7 @@
             }
         }
 
-        /* SLIDE 1: THE PROBLEM */
+        /* SLIDE 1: WHO WE'RE BUILDING FOR */
         #slide1 {
             background: #2C3E50;
             color: white;
@@ -146,166 +154,227 @@
             flex-direction: column;
             height: 100%;
             justify-content: flex-start;
-            gap: 20px;
         }
 
         .problem-title {
-            font-size: 2.8em;
+            font-size: 3em;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 40px;
+        }
+
+        .stat-box {
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 10px;
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .stat-box.danger {
+            background: rgba(231, 76, 60, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
             margin-bottom: 10px;
         }
 
-        .chatbot-fail {
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
-            padding: 25px;
-            border: 2px solid rgba(231, 76, 60, 0.5);
-            position: relative;
-        }
-
-        .chatbot-fail::before {
-            content: "❌";
-            position: absolute;
-            top: -15px;
-            right: 20px;
-            font-size: 2em;
-        }
-
-        .chat-message {
-            background: rgba(255,255,255,0.15);
-            padding: 15px 20px;
-            border-radius: 10px;
-            font-size: 1.15em;
-            border-left: 4px solid #e74c3c;
-        }
-
-        .arrow-text {
-            text-align: center;
-            font-size: 1em;
-            opacity: 0.6;
+        .stat-label {
+            opacity: 0.9;
+            font-size: 1.1em;
         }
 
         .quote {
             font-style: italic;
-            font-size: 1.3em;
-            padding: 20px;
+            font-size: 1.35em;
+            margin-top: auto;
+            padding: 25px;
             border-left: 4px solid #e74c3c;
             background: rgba(255,255,255,0.08);
             border-radius: 8px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .quote-attribution {
             text-align: right;
             opacity: 0.7;
-            margin-top: 12px;
+            margin-top: 15px;
             font-size: 0.9em;
             font-weight: 600;
         }
 
-        .bottom-message {
-            padding: 18px;
-            font-size: 1.1em;
-            text-align: center;
-            color: #e74c3c;
-            font-weight: 600;
-            background: rgba(231, 76, 60, 0.15);
-            border-radius: 10px;
-            border: 2px solid rgba(231, 76, 60, 0.3);
-            line-height: 1.5;
-        }
-
-        /* SLIDE 2: WHAT WE LEARNED (MERGED) */
+        /* SLIDE 2: THE BREAKTHROUGH (MERGED) */
         #slide2 {
-            background: linear-gradient(135deg, #2C3E50, #34495E);
-            color: white;
+            background: white;
         }
 
-        .learning-title {
+        .breakthrough-title {
             font-size: 2.8em;
-            margin-bottom: 25px;
+            color: #2C3E50;
             text-align: center;
+            margin-bottom: 40px;
         }
 
-        .learning-grid {
-            display: grid;
-            gap: 20px;
+        .approach-comparison {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 30px;
             flex: 1;
         }
 
-        .learning-card {
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
-            padding: 25px;
-            border-left: 5px solid #667eea;
+        .approach {
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            flex: 1;
+            margin: 0 20px;
         }
 
-        .learning-card h3 {
-            font-size: 1.5em;
-            margin-bottom: 12px;
-            color: #667eea;
+        .approach:hover {
+            transform: scale(1.05);
         }
 
-        .learning-card p {
-            font-size: 1.1em;
-            line-height: 1.5;
-            opacity: 0.95;
+        .old-approach {
+            background: #FFEBEE;
+            border: 3px solid #e74c3c;
         }
 
-        .latency-warning {
-            background: rgba(231, 76, 60, 0.2);
-            border-left-color: #e74c3c;
+        .new-approach {
+            background: #E8F5E9;
+            border: 3px solid #27AE60;
         }
 
-        .latency-warning h3 {
+        .approach h3 {
+            font-size: 2em;
+            margin-bottom: 25px;
+        }
+
+        .old-approach h3 {
             color: #e74c3c;
         }
 
-        .closing-statement {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 1.6em;
-            font-weight: 600;
-            padding: 20px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            border: 2px solid #667eea;
+        .new-approach h3 {
+            color: #27AE60;
         }
 
-        /* SLIDE 3: THE SOLUTION (MERGED) */
+        .approach-questions {
+            font-size: 1.3em;
+            line-height: 2;
+            color: #2C3E50;
+        }
+
+        .old-approach .approach-questions {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .arrow-transform {
+            font-size: 3em;
+            color: #667eea;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .key-insights {
+            background: linear-gradient(135deg, #E3F2FD, #F3E5F5);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .key-insights h4 {
+            color: #2C3E50;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .insight-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .insight-card .emoji {
+            font-size: 1.5em;
+            margin-bottom: 8px;
+        }
+
+        .insight-card strong {
+            color: #667eea;
+            font-size: 0.95em;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .insight-card small {
+            font-size: 0.85em;
+            color: #555;
+        }
+
+        /* SLIDE 3: THE SOLUTION (MERGED DEMO) */
         #slide3 {
             background: #f8f9fa;
         }
 
-        .solution-title {
+        .demo-title {
             font-size: 2.8em;
             color: #2C3E50;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             text-align: center;
         }
 
-        .demo-container {
+        .demo-layout {
             display: flex;
             gap: 30px;
             flex: 1;
         }
 
-        .demo-left {
-            flex: 1.2;
+        .chat-window {
+            flex: 1.3;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
 
-        .demo-right {
-            flex: 1;
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        .message {
+            animation: messageSlide 0.5s ease-out;
         }
 
-        .message {
-            margin: 10px 0;
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .bot-bubble {
@@ -313,6 +382,7 @@
             color: white;
             padding: 15px 20px;
             border-radius: 20px 20px 20px 5px;
+            max-width: 75%;
             font-size: 1.05em;
             line-height: 1.5;
         }
@@ -322,34 +392,42 @@
             color: #2C3E50;
             padding: 15px 20px;
             border-radius: 20px 20px 5px 20px;
+            max-width: 75%;
             margin-left: auto;
             text-align: right;
             font-size: 1.05em;
-            max-width: 80%;
         }
 
         .message.user {
             text-align: right;
         }
 
-        .features-box {
-            background: linear-gradient(135deg, #E3F2FD, #F3E5F5);
-            border-radius: 15px;
-            padding: 25px;
+        .features-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        .features-box h3 {
+        .feature-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .feature-box h4 {
             color: #667eea;
-            font-size: 1.4em;
+            font-size: 1.2em;
             margin-bottom: 15px;
         }
 
         .feature-item {
-            font-size: 1.1em;
             margin: 12px 0;
-            padding-left: 30px;
+            padding-left: 28px;
             position: relative;
             color: #2C3E50;
+            font-size: 1em;
         }
 
         .feature-item::before {
@@ -358,11 +436,87 @@
             left: 0;
             color: #27AE60;
             font-weight: bold;
-            font-size: 1.3em;
+            font-size: 1.2em;
         }
 
-        /* SLIDE 4: NEXT STEPS */
+        .tech-note {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        /* SLIDE 4: THE IMPACT */
         #slide4 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .impact-title {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .impact-comparison {
+            display: flex;
+            justify-content: space-around;
+            gap: 40px;
+            flex: 1;
+        }
+
+        .impact-column {
+            flex: 1;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .before-column {
+            border: 3px solid rgba(231, 76, 60, 0.8);
+        }
+
+        .after-column {
+            border: 3px solid rgba(39, 174, 96, 0.8);
+        }
+
+        .impact-column h3 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .impact-item {
+            margin: 20px 0;
+            font-size: 1.2em;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+
+        .before-column .impact-item {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .impact-tagline {
+            text-align: center;
+            font-size: 2em;
+            margin-top: 30px;
+            font-weight: 600;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* SLIDE 5: NEXT STEPS */
+        #slide5 {
             background: white;
         }
 
@@ -370,15 +524,15 @@
             font-size: 2.5em;
             color: #2C3E50;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .journey-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 35px;
-            gap: 20px;
+            margin-bottom: 40px;
+            gap: 30px;
         }
 
         .journey-step {
@@ -386,8 +540,8 @@
         }
 
         .step-circle {
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             background: linear-gradient(135deg, #667eea, #764ba2);
             display: flex;
@@ -395,20 +549,25 @@
             justify-content: center;
             margin: 0 auto 10px;
             color: white;
-            font-size: 28px;
+            font-size: 2em;
             font-weight: bold;
+        }
+
+        .step-circle.next {
+            background: #FFF9C4;
+            border: 3px solid #667eea;
+            color: #667eea;
         }
 
         .step-label {
             color: #667eea;
-            font-size: 1.1em;
             font-weight: bold;
             margin-bottom: 5px;
         }
 
         .step-desc {
             color: #2C3E50;
-            font-size: 0.95em;
+            font-size: 0.9em;
         }
 
         .arrow-between {
@@ -416,28 +575,68 @@
             font-size: 2em;
         }
 
+        .insights-box {
+            background: linear-gradient(135deg, #E3F2FD, #F3E5F5);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .insights-box h3 {
+            color: #2C3E50;
+            margin-bottom: 25px;
+            font-size: 1.4em;
+            text-align: center;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .insight-item {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .insight-item .emoji {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .insight-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .insight-item small {
+            font-size: 0.9em;
+            color: #555;
+        }
+
         .panel-box {
+            text-align: center;
+            padding: 25px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border-radius: 15px;
-            padding: 30px;
-            text-align: center;
         }
 
         .panel-box h3 {
             font-size: 1.8em;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .panel-box p {
             font-size: 1.2em;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .panel-details {
-            font-size: 1em;
             opacity: 0.9;
-            margin-top: 15px;
         }
     </style>
 </head>
@@ -445,127 +644,151 @@
     <div class="presentation-container">
         <!-- SLIDE 0: TITLE (15s) -->
         <div class="slide active" id="slide-title">
-            <h1>Financial AI for Migrant Workers</h1>
-            <h2>Empowering Financial Inclusion Through Voice Technology</h2>
+            <h1>Personalizing Financial AI</h1>
+            <h2>for Migrant Workers</h2>
+            <div class="team">Caroline • Wooz • Alex • Gigi<br>with Selvan</div>
         </div>
 
-        <!-- SLIDE 1: THE PROBLEM (45s) -->
+        <!-- SLIDE 1: WHO WE'RE BUILDING FOR (45s) -->
         <div class="slide" id="slide1">
             <div class="problem-container">
-                <h2 class="problem-title">The Technical Trap We Fell Into</h2>
-                
-                <div class="chatbot-fail">
-                    <div style="font-size: 1.2em; margin-bottom: 12px; font-weight: 600;">We'll be honest — typical tech hubris:</div>
-                    <div style="font-size: 1em; opacity: 0.9;">"Slap GPT-4 on it, write a prompt, ship it."</div>
+                <h2 class="problem-title">Who We're Building For</h2>
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <div class="stat-number">300,000+</div>
+                        <div class="stat-label">Workers in Singapore</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">$6.8-10K</div>
+                        <div class="stat-label">Recruitment debt</div>
+                    </div>
+                    <div class="stat-box danger">
+                        <div class="stat-number">66%</div>
+                        <div class="stat-label">Have ZERO savings</div>
+                    </div>
                 </div>
-
-                <div class="chat-message">
-                    <strong>Our First Version:</strong> "Save $50 this month"
-                </div>
-                
-                <div class="arrow-text">
-                    ↓ Technically impressive, instant personalized advice ↓
-                </div>
-                
-                <div class="chat-message">
-                    <strong>But completely disconnected...</strong>
-                </div>
-
                 <div class="quote">
-                    "After I send money home and pay for food and transport, I don't even have that much left."
-                    <div class="quote-attribution">— Worker feedback</div>
-                </div>
-
-                <div class="bottom-message">
-                    We optimized for technical elegance but built for the wrong model:<br>
-                    Individual optimization when we should have designed for collectivist family systems
+                    "It told me to save $50, but after I send money home and pay for food and transport, I don't even have that much left. It makes no sense."
+                    <div class="quote-attribution">— Construction worker, 1-2 days off/month</div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 2: WHAT WE LEARNED (45s) -->
+        <!-- SLIDE 2: THE BREAKTHROUGH + KEY INSIGHTS (45s) -->
         <div class="slide" id="slide2">
-            <h2 class="learning-title">What We Learned</h2>
-            
-            <div class="learning-grid">
-                <div class="learning-card">
-                    <h3>🎭 The Script Paradox</h3>
-                    <p>Workers type casually ("how much") but want formal responses. What looks like a UX quirk is actually about respect and dignity in financial advice.</p>
+            <h2 class="breakthrough-title">What If We Asked Different Questions?</h2>
+            <div class="approach-comparison">
+                <div class="approach old-approach">
+                    <h3>❌ OLD APPROACH</h3>
+                    <div class="approach-questions">
+                        "What's your monthly income?"<br>
+                        "How much do you spend?"
+                    </div>
                 </div>
-
-                <div class="learning-card">
-                    <h3>🌐 Same Workplace, Different Worlds</h3>
-                    <p>Two workers at SMU had vastly different financial realities. Within-group diversity requires personalization, not population-level assumptions.</p>
-                </div>
-
-                <div class="learning-card latency-warning">
-                    <h3>⏱️ The Latency Problem</h3>
-                    <p>A 10-15 second delay isn't just latency — it's a worker on lunch break giving up because the tool doesn't respect their time.</p>
+                <div class="arrow-transform">→</div>
+                <div class="approach new-approach">
+                    <h3>✅ NEW APPROACH</h3>
+                    <div class="approach-questions">
+                        "What are you dreaming of?"<br>
+                        "What do you want to achieve?"
+                    </div>
                 </div>
             </div>
-
-            <div class="closing-statement">
-                You can't API-call your way to equity.
+            
+            <div class="key-insights">
+                <h4>Three Key Insights From Our Research:</h4>
+                <div class="insight-grid">
+                    <div class="insight-card">
+                        <div class="emoji">🎭</div>
+                        <strong>The Script Paradox</strong>
+                        <small>Type casually, want formal responses</small>
+                    </div>
+                    <div class="insight-card">
+                        <div class="emoji">📊</div>
+                        <strong>Within-Group Diversity</strong>
+                        <small>Same workplace, vastly different realities</small>
+                    </div>
+                    <div class="insight-card">
+                        <div class="emoji">⏱️</div>
+                        <strong>Latency = Respect</strong>
+                        <small>< 3s or they give up</small>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- SLIDE 3: THE SOLUTION (45s) -->
         <div class="slide" id="slide3">
-            <h2 class="solution-title">The Solution: Voice AI Assistant</h2>
-            
-            <div class="demo-container">
-                <div class="demo-left">
-                    <div class="message user">
-                        <div class="user-bubble">🎤 how much can i save by sending $500 home?</div>
-                    </div>
-                    
+            <h2 class="demo-title">The Solution: Dream-First AI Assistant</h2>
+            <div class="demo-layout">
+                <div class="chat-window">
                     <div class="message">
-                        <div class="bot-bubble">
-                            Based on current rates from Bangladesh:<br><br>
-                            <strong>Wise:</strong> $3.87 fee, you get ৳41,580<br>
-                            <strong>Western Union:</strong> $8.50 fee, you get ৳41,034<br><br>
-                            💡 You'll save ~$4.63 using Wise (৩০০ টাকা বেশি)
-                        </div>
+                        <div class="bot-bubble">Welcome! What are you working toward? What's your dream?</div>
                     </div>
-
-                    <div class="features-box">
-                        <h3>How It Works</h3>
-                        <div class="feature-item">Real-time exchange rates & fees</div>
-                        <div class="feature-item">Multilingual (Bengali, Tamil, Chinese)</div>
-                        <div class="feature-item">Voice-first, optimized for speed</div>
-                        <div class="feature-item">Grounded in worker's actual context</div>
+                    <div class="message user">
+                        <div class="user-bubble">I want to buy motorcycle, go home see my family</div>
+                    </div>
+                    <div class="message">
+                        <div class="bot-bubble">That's beautiful. To help you reach it, I need to understand your situation...<br><br>
+                        • How much do you earn?<br>
+                        • Do you send money home?<br>
+                        • Any debts or loans?</div>
+                    </div>
+                    <div class="message user">
+                        <div class="user-bubble">earn $800, send $300 home, owe $5000</div>
+                    </div>
+                    <div class="message">
+                        <div class="bot-bubble">💰 Based on your situation, you're 28% toward your motorcycle!<br><br>
+                        ✓ You can reach it in 18 months<br>
+                        ✓ Try saving just $50/month from transport<br>
+                        ✓ Switch to Wise - saves $4.63 per remittance</div>
                     </div>
                 </div>
 
-                <div class="demo-right">
-                    <h3 style="color: #667eea; margin-bottom: 20px; font-size: 1.3em;">Key Features</h3>
-                    
-                    <div style="margin-bottom: 20px;">
-                        <div style="background: #E8F5E9; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                            <strong style="color: #27AE60;">✓ Personalized Advice</strong>
-                            <p style="font-size: 0.95em; margin-top: 5px; color: #2C3E50;">Considers remittances, transport, food costs</p>
-                        </div>
-
-                        <div style="background: #FFF9C4; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                            <strong style="color: #F39C12;">⚡ Fast Response</strong>
-                            <p style="font-size: 0.95em; margin-top: 5px; color: #2C3E50;">< 3 seconds for lunch break convenience</p>
-                        </div>
-
-                        <div style="background: #E3F2FD; padding: 15px; border-radius: 10px;">
-                            <strong style="color: #667eea;">🌍 Multilingual</strong>
-                            <p style="font-size: 0.95em; margin-top: 5px; color: #2C3E50;">Mixed input, native language output</p>
-                        </div>
+                <div class="features-panel">
+                    <div class="feature-box">
+                        <h4>How It Works</h4>
+                        <div class="feature-item">Multilingual (Bengali, Tamil, Hindi)</div>
+                        <div class="feature-item">Real-time exchange rates & fees</div>
+                        <div class="feature-item">Voice-first, < 3 second response</div>
+                        <div class="feature-item">Dream-focused, not debt-focused</div>
+                        <div class="feature-item">Respects collectivist values</div>
                     </div>
-
-                    <div style="text-align: center; padding: 15px; background: rgba(102, 126, 234, 0.1); border-radius: 10px;">
-                        <small style="color: #2C3E50; font-style: italic;">Powered by Sarvam-1 & Sahabat-AI</small>
+                    
+                    <div class="tech-note">
+                        <small>Powered by Sarvam-1 & Sahabat-AI<br>
+                        Real API integrations for live data</small>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 4: NEXT STEPS (30s) -->
+        <!-- SLIDE 4: THE IMPACT (45s) -->
         <div class="slide" id="slide4">
+            <h2 class="impact-title">From Generic to Personal</h2>
+            <div class="impact-comparison">
+                <div class="impact-column before-column">
+                    <h3>❌ BEFORE</h3>
+                    <div class="impact-item">"Save 20% of your income"</div>
+                    <div class="impact-item">One-size-fits-all</div>
+                    <div class="impact-item">Western models</div>
+                    <div class="impact-item">Deleted within days</div>
+                </div>
+                <div class="impact-column after-column">
+                    <h3>✅ AFTER</h3>
+                    <div class="impact-item">"You're 28% toward your motorcycle"</div>
+                    <div class="impact-item">Dream-focused</div>
+                    <div class="impact-item">Collectivist frameworks</div>
+                    <div class="impact-item">Actually used</div>
+                </div>
+            </div>
+            <div class="impact-tagline">
+                The chatbot becomes a partner, not a lecturer
+            </div>
+        </div>
+
+        <!-- SLIDE 5: NEXT STEPS (30s) -->
+        <div class="slide" id="slide5">
             <h2 class="next-title">Let's Continue the Conversation</h2>
             
             <div class="journey-container">
@@ -574,35 +797,29 @@
                     <div class="step-label">Research</div>
                     <div class="step-desc">3 months<br>12 workers</div>
                 </div>
-
                 <div class="arrow-between">→</div>
-
                 <div class="journey-step">
                     <div class="step-circle">2</div>
                     <div class="step-label">Co-create</div>
                     <div class="step-desc">Built WITH<br>not FOR</div>
                 </div>
-
                 <div class="arrow-between">→</div>
-
                 <div class="journey-step">
                     <div class="step-circle">3</div>
                     <div class="step-label">Prototype</div>
                     <div class="step-desc">MVP ready<br>for testing</div>
                 </div>
-
                 <div class="arrow-between">→</div>
-
                 <div class="journey-step">
-                    <div class="step-circle" style="background: #FFF9C4; border: 3px solid #667eea; color: #667eea;">?</div>
+                    <div class="step-circle next">?</div>
                     <div class="step-label">Next?</div>
                     <div class="step-desc">Let's discuss<br>together</div>
                 </div>
             </div>
 
             <div class="panel-box">
-                <h3>Panel Discussion</h3>
-                <p>"What we learnt from Migrant Workers about building chatbots"</p>
+                <h3>Join our panel discussion:</h3>
+                <p>"Peaks and Troughs Towards the Wider Community"</p>
                 <div class="panel-details">
                     <strong>Panelists:</strong> Caroline & Alex (Researchers) • Selvan (Community Partner)<br>
                     <strong>Moderated by:</strong> Andrew
@@ -615,7 +832,7 @@
     <div class="nav-controls">
         <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
         <div class="slide-counter">
-            <span id="currentSlide">1</span> / <span id="totalSlides">5</span>
+            <span id="currentSlide">1</span> / <span id="totalSlides">6</span>
         </div>
         <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
     </div>
@@ -670,8 +887,8 @@
         });
 
         function handleSwipe() {
-            if (touchEndX < touchStartX - 50) changeSlide(1);  // Swipe left
-            if (touchEndX > touchStartX + 50) changeSlide(-1); // Swipe right
+            if (touchEndX < touchStartX - 50) changeSlide(1);
+            if (touchEndX > touchStartX + 50) changeSlide(-1);
         }
 
         // Initialize
