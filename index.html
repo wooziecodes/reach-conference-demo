@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial AI for Migrant Workers - Demo</title>
+    <title>Financial AI for Migrant Workers - Complete Session</title>
     <style>
         * {
             margin: 0;
@@ -12,7 +12,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
@@ -57,6 +57,50 @@
                 transform: translateX(0);
             }
         }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInMessage {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-delay-1 { animation-delay: 0.2s; animation-fill-mode: backwards; }
+        .animate-delay-2 { animation-delay: 0.4s; animation-fill-mode: backwards; }
+        .animate-delay-3 { animation-delay: 0.6s; animation-fill-mode: backwards; }
+        .animate-delay-4 { animation-delay: 0.8s; animation-fill-mode: backwards; }
+        .animate-delay-5 { animation-delay: 1.0s; animation-fill-mode: backwards; }
 
         /* Navigation */
         .nav-controls {
@@ -103,6 +147,85 @@
             color: #333;
         }
 
+        /* SLIDE 0: CASE STUDY OVERVIEW */
+        #slide-0 {
+            background: white;
+        }
+
+        .case-study-header {
+            font-size: 3em;
+            color: #1B4F91;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .case-study-layout {
+            display: flex;
+            gap: 30px;
+            height: calc(100% - 120px);
+        }
+
+        .case-study-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .case-study-box {
+            background: #1B4F91;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .case-study-content {
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: #2C3E50;
+            margin-bottom: 20px;
+        }
+
+        .case-study-image-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .case-study-image-placeholder {
+            background: #f0f0f0;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            font-style: italic;
+            color: #666;
+        }
+
+        .insights-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .insights-list li {
+            padding: 12px 0;
+            font-size: 1.05em;
+            line-height: 1.6;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .insights-list li:last-child {
+            border-bottom: none;
+        }
+
+        .insights-list strong {
+            color: #1B4F91;
+        }
+
         /* Title Slide */
         #slide-title {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -121,9 +244,16 @@
         #slide-title h2 {
             font-size: 2em;
             font-weight: 300;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             opacity: 0.9;
             animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        #slide-title .subtitle {
+            font-size: 1.2em;
+            opacity: 0.85;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
         }
 
         #slide-title .team {
@@ -132,18 +262,7 @@
             animation: fadeInUp 1s ease-out 0.4s backwards;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Slide 1: The Problem */
+        /* SLIDE 1: WHO WE'RE BUILDING FOR */
         #slide1 {
             background: #2C3E50;
             color: white;
@@ -153,550 +272,748 @@
             display: flex;
             flex-direction: column;
             height: 100%;
-            justify-content: space-between;
+            justify-content: flex-start;
         }
 
         .problem-title {
             font-size: 3em;
             margin-bottom: 30px;
             color: #fff;
+            animation: fadeInUp 0.8s ease-out;
         }
 
-        .chatbot-fail {
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 40px;
+        }
+
+        .stat-box {
+            text-align: center;
             background: rgba(255,255,255,0.1);
-            border-radius: 15px;
-            padding: 30px;
-            margin: 20px 0;
-            border: 2px solid rgba(231, 76, 60, 0.5);
-            position: relative;
-        }
-
-        .chatbot-fail::before {
-            content: "❌";
-            position: absolute;
-            top: -20px;
-            right: 20px;
-            font-size: 2em;
-        }
-
-        .chat-message {
-            background: rgba(255,255,255,0.15);
-            padding: 15px 20px;
+            padding: 25px;
             border-radius: 10px;
-            margin: 10px 0;
-            font-size: 1.2em;
+            flex: 1;
+            margin: 0 10px;
+            animation: fadeInUp 0.8s ease-out;
         }
 
-        .bot-message {
-            align-self: flex-start;
-            border-left: 4px solid #e74c3c;
+        .stat-box.danger {
+            background: rgba(231, 76, 60, 0.3);
+        }
+
+        .stat-box:nth-child(1) { animation-delay: 0.2s; animation-fill-mode: backwards; }
+        .stat-box:nth-child(2) { animation-delay: 0.4s; animation-fill-mode: backwards; }
+        .stat-box:nth-child(3) { animation-delay: 0.6s; animation-fill-mode: backwards; }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            opacity: 0.9;
+            font-size: 1.1em;
         }
 
         .quote {
             font-style: italic;
-            font-size: 1.4em;
-            margin-top: 30px;
-            padding: 20px;
+            font-size: 1.35em;
+            margin-top: auto;
+            padding: 25px;
             border-left: 4px solid #e74c3c;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.08);
+            border-radius: 8px;
+            line-height: 1.6;
+            animation: fadeInUp 0.8s ease-out 0.8s backwards;
         }
 
         .quote-attribution {
             text-align: right;
             opacity: 0.7;
-            margin-top: 10px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            font-weight: 600;
         }
 
-        /* Slide 2: The Breakthrough */
+        /* SLIDE 2: THE BREAKTHROUGH */
         #slide2 {
             background: white;
         }
 
         .breakthrough-title {
-            font-size: 3em;
+            font-size: 2.8em;
             color: #2C3E50;
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 35px;
+            animation: fadeInUp 0.8s ease-out;
         }
 
         .approach-comparison {
             display: flex;
             justify-content: space-around;
             align-items: center;
-            height: 70%;
+            margin-bottom: 35px;
         }
 
         .approach {
-            padding: 40px;
-            border-radius: 20px;
+            flex: 1;
+            padding: 30px;
+            border-radius: 15px;
             text-align: center;
             transition: transform 0.3s ease;
-            flex: 1;
-            margin: 0 20px;
-        }
-
-        .approach:hover {
-            transform: scale(1.05);
+            animation: slideInRight 0.8s ease-out;
         }
 
         .old-approach {
-            background: #FFEBEE;
+            background: #ffe6e6;
             border: 3px solid #e74c3c;
+            animation-delay: 0.2s;
+            animation-fill-mode: backwards;
         }
 
         .new-approach {
-            background: #E8F5E9;
-            border: 3px solid #27AE60;
+            background: #e6f7e6;
+            border: 3px solid #27ae60;
+            animation-delay: 0.4s;
+            animation-fill-mode: backwards;
         }
 
         .approach h3 {
-            font-size: 2em;
-            margin-bottom: 30px;
-        }
-
-        .old-approach h3 {
-            color: #e74c3c;
-        }
-
-        .new-approach h3 {
-            color: #27AE60;
+            font-size: 1.8em;
+            margin-bottom: 20px;
         }
 
         .approach-questions {
             font-size: 1.3em;
-            line-height: 2;
+            line-height: 1.8;
             color: #2C3E50;
-        }
-
-        .old-approach .approach-questions {
-            text-decoration: line-through;
-            opacity: 0.7;
         }
 
         .arrow-transform {
             font-size: 3em;
             color: #667eea;
-            animation: bounce 2s infinite;
+            font-weight: bold;
+            margin: 0 20px;
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .key-insights {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
         }
 
-        /* Slide 3: Demo - Onboarding */
+        .key-insights h4 {
+            font-size: 1.6em;
+            color: #2C3E50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .insight-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .insight-card:nth-child(1) { animation-delay: 0.8s; animation-fill-mode: backwards; }
+        .insight-card:nth-child(2) { animation-delay: 1.0s; animation-fill-mode: backwards; }
+        .insight-card:nth-child(3) { animation-delay: 1.2s; animation-fill-mode: backwards; }
+
+        .insight-card .emoji {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .insight-card strong {
+            display: block;
+            font-size: 1.1em;
+            color: #2C3E50;
+            margin-bottom: 8px;
+        }
+
+        .insight-card small {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        /* SLIDE 3: THE SOLUTION */
         #slide3 {
             background: #f8f9fa;
         }
 
         .demo-title {
-            font-size: 2.5em;
+            font-size: 2.8em;
             color: #2C3E50;
+            text-align: center;
             margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .demo-layout {
+            display: flex;
+            gap: 30px;
+            flex: 1;
         }
 
         .chat-window {
+            flex: 1.5;
             background: white;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            padding: 30px;
-            height: 60%;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             overflow-y: auto;
+            max-height: 450px;
         }
 
         .message {
-            margin: 15px 0;
-            animation: messageSlide 0.5s ease-out;
+            margin-bottom: 15px;
+            animation: fadeInMessage 0.5s ease-out;
+            opacity: 0;
         }
 
-        @keyframes messageSlide {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .bot-bubble {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 20px 20px 20px 5px;
-            max-width: 70%;
-            display: inline-block;
-        }
-
-        .user-bubble {
-            background: #E8F5E9;
-            color: #2C3E50;
-            padding: 15px 20px;
-            border-radius: 20px 20px 5px 20px;
-            max-width: 70%;
-            display: inline-block;
-            margin-left: auto;
-            text-align: right;
+        .message.visible {
+            opacity: 1;
         }
 
         .message.user {
             text-align: right;
         }
 
-        .insight-box {
-            background: #FFF9C4;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            font-size: 1.2em;
+        .bot-bubble, .user-bubble {
+            display: inline-block;
+            padding: 15px 20px;
+            border-radius: 15px;
+            max-width: 80%;
+            line-height: 1.5;
+            font-size: 1.05em;
+        }
+
+        .bot-bubble {
+            background: #667eea;
+            color: white;
+            border-bottom-left-radius: 5px;
+        }
+
+        .user-bubble {
+            background: #e9ecef;
+            color: #2C3E50;
+            border-bottom-right-radius: 5px;
+        }
+
+        .features-panel {
+            flex: 1;
             display: flex;
-            align-items: center;
-            gap: 15px;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .insight-box::before {
-            content: "💡";
-            font-size: 2em;
+        .feature-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
         }
 
-        /* Slide 4: Personalized Advice */
+        .feature-box h4 {
+            font-size: 1.5em;
+            color: #2C3E50;
+            margin-bottom: 15px;
+        }
+
+        .feature-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+            color: #495057;
+            animation: fadeInUp 0.5s ease-out;
+            opacity: 0;
+        }
+
+        .feature-item.visible {
+            opacity: 1;
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        .tech-note {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #ffc107;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+
+        .tech-note small {
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        /* SLIDE 4: THE IMPACT */
         #slide4 {
             background: white;
         }
 
-        .advice-container {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .advice-title {
-            font-size: 2.5em;
-            color: #2C3E50;
-            margin-bottom: 30px;
-        }
-
-        .personalized-response {
-            background: linear-gradient(135deg, #E3F2FD, #F3E5F5);
-            border-radius: 20px;
-            padding: 40px;
-            flex-grow: 1;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .advice-item {
-            font-size: 1.4em;
-            margin: 25px 0;
-            padding-left: 50px;
-            position: relative;
-            color: #2C3E50;
-            animation: fadeInLeft 0.6s ease-out;
-        }
-
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .advice-item .emoji {
-            position: absolute;
-            left: 0;
-            font-size: 1.5em;
-        }
-
-        .highlight {
-            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-            padding: 2px 8px;
-            border-radius: 5px;
-            font-weight: 600;
-        }
-
-        .reality-note {
-            text-align: center;
-            font-size: 1.5em;
-            color: #2C3E50;
-            font-weight: 600;
-            margin-top: 30px;
-        }
-
-        /* Slide 5: Multilingual */
-        #slide5 {
-            background: linear-gradient(135deg, #ffffff 0%, #E3F2FD 100%);
-        }
-
-        .multilingual-title {
-            font-size: 2.5em;
-            color: #2C3E50;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .language-demo {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            gap: 40px;
-        }
-
-        .language-box {
-            flex: 1;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            min-height: 200px;
-        }
-
-        .language-box h3 {
-            color: #667eea;
-            margin-bottom: 20px;
-        }
-
-        .mixed-input {
-            font-family: 'Courier New', monospace;
-            color: #555;
-            font-size: 1.2em;
-            line-height: 1.8;
-        }
-
-        .bengali-output {
-            font-size: 1.4em;
-            color: #2C3E50;
-            line-height: 2;
-        }
-
-        .language-arrow {
-            font-size: 3em;
-            color: #667eea;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .language-insight {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 1.3em;
-            color: #2C3E50;
-            background: rgba(255,255,255,0.8);
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        /* Slide 6: Multi-platform */
-        #slide6 {
-            background: white;
-        }
-
-        .platform-title {
-            font-size: 2.5em;
-            color: #2C3E50;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .platforms-container {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            gap: 40px;
-        }
-
-        .platform-mock {
-            flex: 1;
-            text-align: center;
-        }
-
-        .phone-frame {
-            width: 250px;
-            height: 500px;
-            background: #000;
-            border-radius: 30px;
-            padding: 10px;
-            margin: 0 auto 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .phone-screen {
-            width: 100%;
-            height: 100%;
-            background: white;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .app-header {
-            padding: 15px;
-            font-weight: 600;
-            border-bottom: 1px solid #eee;
-        }
-
-        .whatsapp-header {
-            background: #075E54;
-            color: white;
-        }
-
-        .telegram-header {
-            background: #0088cc;
-            color: white;
-        }
-
-        .chat-area {
-            flex: 1;
-            padding: 15px;
-            background: #E5DDD5;
-        }
-
-        .telegram-area {
-            background: #e5e5ea;
-        }
-
-        .mini-message {
-            padding: 8px 12px;
-            border-radius: 10px;
-            margin: 5px 0;
-            font-size: 0.9em;
-        }
-
-        .features-list {
-            text-align: left;
-            margin-top: 20px;
-        }
-
-        .feature {
-            color: #27AE60;
-            margin: 10px 0;
-            font-size: 1.1em;
-        }
-
-        /* Slide 7: Impact */
-        #slide7 {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
         .impact-title {
-            font-size: 3em;
+            font-size: 2.8em;
+            color: #2C3E50;
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .evolution-subtitle {
+            text-align: center;
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 35px;
+            font-style: italic;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
         }
 
         .impact-comparison {
             display: flex;
             justify-content: space-around;
             gap: 40px;
+            margin-bottom: 40px;
         }
 
         .impact-column {
             flex: 1;
-            background: rgba(255,255,255,0.1);
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            animation: slideInRight 0.8s ease-out;
         }
 
         .before-column {
-            border: 3px solid rgba(231, 76, 60, 0.8);
+            background: #ffe6e6;
+            border: 3px solid #e74c3c;
+            animation-delay: 0.3s;
+            animation-fill-mode: backwards;
         }
 
         .after-column {
-            border: 3px solid rgba(39, 174, 96, 0.8);
+            background: #e6f7e6;
+            border: 3px solid #27ae60;
+            animation-delay: 0.5s;
+            animation-fill-mode: backwards;
         }
 
         .impact-column h3 {
-            font-size: 2em;
-            margin-bottom: 30px;
+            font-size: 1.8em;
+            margin-bottom: 25px;
             text-align: center;
         }
 
         .impact-item {
-            margin: 20px 0;
-            font-size: 1.2em;
-            padding: 15px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
+            padding: 12px 0;
+            font-size: 1.15em;
+            color: #2C3E50;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            animation: fadeInUp 0.5s ease-out;
+            opacity: 0;
         }
 
-        .before-column .impact-item {
-            text-decoration: line-through;
-            opacity: 0.7;
+        .impact-item.visible {
+            opacity: 1;
+        }
+
+        .impact-item:last-child {
+            border-bottom: none;
         }
 
         .impact-tagline {
             text-align: center;
-            font-size: 2em;
-            margin-top: 40px;
+            font-size: 1.6em;
+            color: #667eea;
             font-weight: 600;
-            animation: glow 2s ease-in-out infinite;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            animation: fadeInUp 0.8s ease-out 0.7s backwards;
         }
 
-        @keyframes glow {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+        /* SLIDE 5: LANGUAGE DEMO - Panel Discussion */
+        #slide5 {
+            background: white;
+        }
+
+        .panel-title {
+            font-size: 2.5em;
+            color: #2C3E50;
+            text-align: center;
+            margin-bottom: 25px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .language-demo-container {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .language-example {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border: 3px solid #667eea;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .language-example:nth-child(1) { animation-delay: 0.2s; animation-fill-mode: backwards; }
+        .language-example:nth-child(2) { animation-delay: 0.4s; animation-fill-mode: backwards; }
+
+        .language-example h4 {
+            font-size: 1.4em;
+            color: #667eea;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .language-text {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .insight-box {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #ffc107;
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
+        }
+
+        .insight-box p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #856404;
+            font-style: italic;
+        }
+
+        /* SLIDE 6: TECHNICAL SAFEGUARDS - Panel Discussion */
+        #slide6 {
+            background: white;
+        }
+
+        .safeguards-title {
+            font-size: 2.5em;
+            color: #2C3E50;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .safeguards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .safeguard-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .safeguard-card:nth-child(1) { animation-delay: 0.2s; animation-fill-mode: backwards; }
+        .safeguard-card:nth-child(2) { animation-delay: 0.4s; animation-fill-mode: backwards; }
+        .safeguard-card:nth-child(3) { animation-delay: 0.6s; animation-fill-mode: backwards; }
+        .safeguard-card:nth-child(4) { animation-delay: 0.8s; animation-fill-mode: backwards; }
+
+        .safeguard-card h4 {
+            font-size: 1.3em;
+            color: #667eea;
+            margin-bottom: 12px;
+        }
+
+        .safeguard-card p {
+            font-size: 1.05em;
+            line-height: 1.6;
+            color: #2C3E50;
+        }
+
+        .safeguard-card .stat {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #e74c3c;
+            margin: 10px 0;
+        }
+
+        /* SLIDE 7: MULTI-PLATFORM - Panel Discussion */
+        #slide7 {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .platform-title {
+            font-size: 2.5em;
+            color: #2C3E50;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .platform-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .platform-box {
+            flex: 1;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .platform-box:nth-child(1) { animation-delay: 0.2s; animation-fill-mode: backwards; }
+        .platform-box:nth-child(2) { animation-delay: 0.4s; animation-fill-mode: backwards; }
+
+        .platform-icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+        }
+
+        .platform-box h4 {
+            font-size: 1.5em;
+            color: #2C3E50;
+            margin-bottom: 15px;
+        }
+
+        .platform-box p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .platform-strategy {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            border: 3px solid #667eea;
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
+        }
+
+        .platform-strategy h4 {
+            font-size: 1.4em;
+            color: #667eea;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .platform-strategy p {
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: #2C3E50;
+            text-align: center;
+        }
+
+        /* SLIDE 8: NEXT STEPS */
+        #slide8 {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .next-title {
+            font-size: 2.8em;
+            color: #2C3E50;
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .journey-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .journey-step {
+            text-align: center;
+            flex: 1;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .journey-step:nth-child(1) { animation-delay: 0.2s; animation-fill-mode: backwards; }
+        .journey-step:nth-child(3) { animation-delay: 0.4s; animation-fill-mode: backwards; }
+        .journey-step:nth-child(5) { animation-delay: 0.6s; animation-fill-mode: backwards; }
+        .journey-step:nth-child(7) { animation-delay: 0.8s; animation-fill-mode: backwards; }
+
+        .step-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            margin: 0 auto 15px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .step-circle.next {
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .step-label {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2C3E50;
+            margin-bottom: 8px;
+        }
+
+        .step-desc {
+            font-size: 0.95em;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .arrow-between {
+            font-size: 2.5em;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .panel-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out 1.0s backwards;
+        }
+
+        .panel-box h3 {
+            font-size: 1.8em;
+            color: #2C3E50;
+            margin-bottom: 15px;
+        }
+
+        .panel-box p {
+            font-size: 1.3em;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .panel-details {
+            font-size: 1.1em;
+            color: #495057;
+            line-height: 1.8;
         }
     </style>
 </head>
 <body>
     <div class="presentation-container">
-        <!-- Title Slide -->
-        <div class="slide active" id="slide-title">
-            <h1>Personalizing Financial AI</h1>
-            <h2>for Migrant Workers</h2>
-            <div class="team">Caroline • Wooz • Alex • Gigi<br>with Selvan</div>
-        </div>
-<!-- Slide 2: Who We're Building For -->
-<div class="slide" id="slide1">
-    <div class="problem-container">
-        <h2 class="problem-title">Who We're Building For</h2>
-        <div style="display: flex; justify-content: space-around; margin-bottom: 30px;">
-            <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
-                <div style="font-size: 2.5em; font-weight: bold;">300,000+</div>
-                <div style="opacity: 0.9;">Workers in Singapore</div>
-            </div>
-            <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
-                <div style="font-size: 2.5em; font-weight: bold;">$6.8-10K</div>
-                <div style="opacity: 0.9;">Recruitment debt</div>
-            </div>
-            <div style="text-align: center; background: rgba(231, 76, 60, 0.3); padding: 20px; border-radius: 10px;">
-                <div style="font-size: 2.5em; font-weight: bold;">66%</div>
-                <div style="opacity: 0.9;">Have ZERO savings</div>
-            </div>
-        </div>
-        <div class="quote">
-            "It told me to save $50, but after I send money home and pay for food and transport, I don't even have that much left. It makes no sense."
-            <div class="quote-attribution">— Construction worker, 1-2 days off/month</div>
-        </div>
-    </div>
-</div>
-        <!-- Slide 1: The Problem -->
-        <div class="slide" id="slide1">
-            <div class="problem-container">
-                <h2 class="problem-title">Why Generic Financial Advice Fails</h2>
-                <div class="chatbot-fail">
-                    <div class="chat-message bot-message">
-                        Bot: "You should save $50 this month"
+        <!-- SLIDE 0: CASE STUDY OVERVIEW (2 min - Caroline) -->
+        <div class="slide active" id="slide-0">
+            <h1 class="case-study-header">Financial Literacy for Migrant Workers Through Conversational AI</h1>
+            
+            <div class="case-study-layout">
+                <div class="case-study-column">
+                    <div class="case-study-box animate-delay-1" style="animation: fadeInUp 0.8s ease-out 0.2s backwards;">CASE STUDY OVERVIEW</div>
+                    <div class="case-study-content animate-delay-2" style="animation: fadeInUp 0.8s ease-out 0.4s backwards;">
+                        <p style="margin-bottom: 15px;">Singapore's 1.59 million migrant workers play a vital role in sustaining the nation's infrastructure, yet many spend their rare rest days queueing at banks for basic financial tasks.</p>
+                        
+                        <p style="margin-bottom: 15px;">This reveals a gap in accessibility and digital inclusion. Although most workers own smartphones, many are unfamiliar with digital tools, presenting an opportunity to design AI-driven solutions.</p>
+                        
+                        <p>Our project explores how co-created chatbots can make financial literacy support more accessible and approachable, helping migrant workers manage their finances more efficiently and meaningfully.</p>
                     </div>
                 </div>
-                <div class="quote">
-                    "It told me to save $50, but after I send money home and pay for food and transport, I don't even have that much left. It makes no sense."
-                    <div class="quote-attribution">— Migrant worker, Focus Group</div>
+                
+                <div class="case-study-column">
+                    <div class="case-study-image-container">
+                        <div class="case-study-image-placeholder animate-delay-3" style="animation: fadeInUp 0.8s ease-out 0.6s backwards; height: 45%; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 3em;">👥</span>
+                            <span style="margin-left: 10px;">Co-creation workshop photo</span>
+                        </div>
+                        <div class="case-study-image-placeholder animate-delay-4" style="animation: fadeInUp 0.8s ease-out 0.8s backwards; height: 45%; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 3em;">💬</span>
+                            <span style="margin-left: 10px;">Multilingual chatbot interface</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="case-study-column">
+                    <div class="case-study-box animate-delay-5" style="animation: fadeInUp 0.8s ease-out 1.0s backwards;">ACTIONABLE INSIGHTS</div>
+                    <ul class="insights-list">
+                        <li class="animate-delay-1" style="animation: fadeInUp 0.8s ease-out 1.2s backwards;"><strong>Meet people where they are:</strong> design co-creation activities that align with their contexts and realities, not ours</li>
+                        <li class="animate-delay-2" style="animation: fadeInUp 0.8s ease-out 1.4s backwards;"><strong>Importance of accessibility and personalisation:</strong> account for diverse literacy levels, languages, and individual financial goals</li>
+                        <li class="animate-delay-3" style="animation: fadeInUp 0.8s ease-out 1.6s backwards;"><strong>Family as motivation:</strong> recognize that supporting family drives migrant workers' financial decisions</li>
+                        <li class="animate-delay-4" style="animation: fadeInUp 0.8s ease-out 1.8s backwards;"><strong>Build genuine relationships:</strong> trust and rapport are essential to elicit meaningful input and ensure solutions are relevant</li>
+                    </ul>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 2: The Breakthrough -->
+        <!-- SLIDE 1: TITLE SLIDE (Demo starts - Arif) -->
+        <div class="slide" id="slide-title">
+            <h1>💰 Building Financial AI That Actually Works</h1>
+            <h2>A Journey of Co-Creation with Migrant Workers</h2>
+            <div class="subtitle">6-month participatory research study • 12 migrant workers • Singapore</div>
+            <div class="team">Caroline Cheng • Alexander Tsai • Gigi Foo • Arif Woozeer</div>
+        </div>
+
+        <!-- SLIDE 2: WHO WE'RE BUILDING FOR -->
+        <div class="slide" id="slide1">
+            <div class="problem-container">
+                <h2 class="problem-title">Who We're Building For</h2>
+                <div class="stats-container">
+                    <div class="stat-box danger">
+                        <div class="stat-number">$16K</div>
+                        <div class="stat-label">Average recruitment debt</div>
+                    </div>
+                    <div class="stat-box danger">
+                        <div class="stat-number">35%</div>
+                        <div class="stat-label">Work every day (7 days/week)</div>
+                    </div>
+                    <div class="stat-box danger">
+                        <div class="stat-number">36%</div>
+                        <div class="stat-label">Carry debt</div>
+                    </div>
+                </div>
+                <div class="quote">
+                    "It told me to save $50, but after I send money home and pay for food and transport, I don't even have that much left. It makes no sense."
+                    <div class="quote-attribution">— Construction worker, 1-2 days off/month</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: THE BREAKTHROUGH -->
         <div class="slide" id="slide2">
             <h2 class="breakthrough-title">What If We Asked Different Questions?</h2>
             <div class="approach-comparison">
@@ -716,296 +1033,235 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="key-insights">
+                <h4>Three Key Insights From Our Research:</h4>
+                <div class="insight-grid">
+                    <div class="insight-card">
+                        <div class="emoji">🎭</div>
+                        <strong>The Script Paradox</strong>
+                        <small>Type casually, want formal responses</small>
+                    </div>
+                    <div class="insight-card">
+                        <div class="emoji">📊</div>
+                        <strong>Within-Group Diversity</strong>
+                        <small>Same workplace, vastly different realities</small>
+                    </div>
+                    <div class="insight-card">
+                        <div class="emoji">⏱️</div>
+                        <strong>Latency = Respect</strong>
+                        <small>Under 3 seconds or they give up</small>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Slide 3: Live Demo - Onboarding -->
+        <!-- SLIDE 4: THE SOLUTION -->
         <div class="slide" id="slide3">
-            <h2 class="demo-title">Dream-First Onboarding</h2>
-            <div class="chat-window">
-                <div class="message">
-                    <div class="bot-bubble">Welcome! What are you working toward? What's your dream?</div>
+            <h2 class="demo-title">The Solution: Dream-First AI Assistant</h2>
+            <div class="demo-layout">
+                <div class="chat-window">
+                    <div class="message" data-delay="500">
+                        <div class="bot-bubble">Welcome! What are you working toward? What's your dream?</div>
+                    </div>
+                    <div class="message user" data-delay="1500">
+                        <div class="user-bubble">I want to buy motorcycle, go home see my family</div>
+                    </div>
+                    <div class="message" data-delay="2500">
+                        <div class="bot-bubble">That's beautiful. To help you reach it, I need to understand your situation...<br><br>
+                        • How much do you earn?<br>
+                        • Do you send money home?<br>
+                        • Any debts or loans?</div>
+                    </div>
+                    <div class="message user" data-delay="3500">
+                        <div class="user-bubble">earn $800, send $300 home, owe $5000</div>
+                    </div>
+                    <div class="message" data-delay="4500">
+                        <div class="bot-bubble">💰 Based on your situation, you're 28% toward your motorcycle!<br><br>
+                        ✓ You can reach it in 18 months<br>
+                        ✓ Try saving just $50/month from transport<br>
+                        ✓ Switch to Wise - saves $4.63 per remittance</div>
+                    </div>
                 </div>
-                <div class="message user">
-                    <div class="user-bubble">I want to buy motorcycle, go home see my family</div>
+
+                <div class="features-panel">
+                    <div class="feature-box">
+                        <h4>Co-Designed Features</h4>
+                        <div class="feature-item" data-delay="500">✓ Multilingual (Bengali, Tamil, Hindi)</div>
+                        <div class="feature-item" data-delay="1000">✓ Real-time exchange rates & fees</div>
+                        <div class="feature-item" data-delay="1500">✓ Voice-first, under 3-second response</div>
+                        <div class="feature-item" data-delay="2000">✓ Goal-focused, not debt-focused</div>
+                        <div class="feature-item" data-delay="2500">✓ Respects collectivist values</div>
+                    </div>
+                    
+                    <div class="tech-note">
+                        <small><strong>Built WITH migrant workers</strong><br>
+                        3 in-person focus groups • Iterative testing<br>
+                        Real API integrations for live data</small>
+                    </div>
                 </div>
-                <div class="message">
-                    <div class="bot-bubble">That's beautiful. To help you reach it, I need to understand your situation...<br><br>
-                    • How much do you earn?<br>
-                    • Do you send money home?<br>
-                    • Any debts or loans?<br>
-                    • Monthly expenses?</div>
-                </div>
-            </div>
-            <div class="insight-box">
-                We're not giving advice yet—we're building a complete picture first
             </div>
         </div>
 
-        <!-- Slide 4: Personalized Advice -->
+        <!-- SLIDE 5: THE IMPACT -->
         <div class="slide" id="slide4">
-            <div class="advice-container">
-                <h2 class="advice-title">Advice Tailored to Reality</h2>
-                <div class="personalized-response">
-                    <div class="advice-item">
-                        <span class="emoji">💰</span>
-                        After remittances (<span class="highlight">$300</span>) and expenses, you have <span class="highlight">$150</span> left
-                    </div>
-                    <div class="advice-item">
-                        <span class="emoji">🏍️</span>
-                        If you save <span class="highlight">$100/month</span>, you'll reach your motorcycle down payment in <span class="highlight">8 months</span>
-                    </div>
-                    <div class="advice-item">
-                        <span class="emoji">📊</span>
-                        Food is your biggest flexible expense (<span class="highlight">$80</span>)—small changes here could speed this up
-                    </div>
-                </div>
-                <div class="reality-note">
-                    Same worker. Same income.<br>
-                    But advice grounded in HIS reality.
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 5: Multilingual Magic -->
-        <div class="slide" id="slide5">
-            <h2 class="multilingual-title">Speaking Their Language—Literally</h2>
-            <div class="language-demo">
-                <div class="language-box">
-                    <h3>WORKER TYPES:</h3>
-                    <div class="mixed-input">
-                        "taka save korbo<br>
-                        emon ki bhabe"<br><br>
-                        (Mixed Bengali/English)
-                    </div>
-                </div>
-                <div class="language-arrow">⟷</div>
-                <div class="language-box">
-                    <h3>BOT RESPONDS:</h3>
-                    <div class="bengali-output">
-                        আপনার স্বপ্ন<br>
-                        অর্জনের জন্য...<br><br>
-                        (Proper Bengali script)
-                    </div>
-                </div>
-            </div>
-            <div class="language-insight">
-                <strong>Workers type CASUALLY</strong> (mixed, romanized)<br>
-                But want to <strong>READ with RESPECT</strong> (proper script)<br><br>
-                <em>Built by Alex using multilingual LLM engine</em>
-            </div>
-        </div>
-
-        
-
-        <!-- Slide 6: Multi-platform -->
-        <div class="slide" id="slide6">
-            <h2 class="platform-title">Meet Them Where They Are</h2>
-            <div class="platforms-container">
-                <div class="platform-mock">
-                    <div class="phone-frame">
-                        <div class="phone-screen">
-                            <div class="app-header whatsapp-header">WhatsApp</div>
-                            <div class="chat-area">
-                                <div class="mini-message" style="background: #DCF8C6;">Voice message support</div>
-                                <div class="mini-message" style="background: white;">Text when commuting</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="features-list">
-                        <div class="feature">✓ Universal adoption</div>
-                        <div class="feature">✓ Voice messages</div>
-                        <div class="feature">✓ Familiar interface</div>
-                    </div>
-                </div>
-                <div class="platform-mock">
-                    <div class="phone-frame">
-                        <div class="phone-screen">
-                            <div class="app-header telegram-header">Telegram</div>
-                            <div class="chat-area telegram-area">
-                                <div class="mini-message" style="background: white;">Quick button responses</div>
-                                <div class="mini-message" style="background: #3390ec; color: white;">Interactive menus</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="features-list">
-                        <div class="feature">✓ 66.7% preferred</div>
-                        <div class="feature">✓ Better buttons</div>
-                        <div class="feature">✓ Faster iteration</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Slide 5: Multilingual Demo -->
-<div class="slide" id="slide5">
-    <h2 class="multilingual-title">🌍 Live Demo: Language That Respects</h2>
-    <div style="display: flex; gap: 30px; align-items: flex-start;">
-        <!-- Chat Demo -->
-        <div style="flex: 1.5; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden;">
-            <div style="background: #25D366; color: white; padding: 15px; font-weight: 600;">
-                Raj's Phone • Bengali Worker
-            </div>
-            <div style="padding: 20px; background: #E5DDD5;">
-                <div style="text-align: right; margin: 15px 0;">
-                    <span style="background: #DCF8C6; padding: 12px 18px; border-radius: 18px 18px 4px 18px; display: inline-block;">
-                        ami taka save korte chai<br>
-                        <small style="color: #666; font-style: italic;">(I want to save money)</small>
-                    </span>
-                </div>
-                <div style="margin: 15px 0;">
-                    <span style="background: white; padding: 12px 18px; border-radius: 18px 18px 18px 4px; display: inline-block; font-size: 1.1em;">
-                        আপনার স্বপ্ন কী? কিসের জন্য সঞ্চয়?<br>
-                        <small style="color: #666;">(What's your dream? What are you saving for?)</small>
-                    </span>
-                </div>
-                <div style="text-align: right; margin: 15px 0;">
-                    <span style="background: #DCF8C6; padding: 12px 18px; border-radius: 18px 18px 4px 18px; display: inline-block;">
-                        ghar banaite 2 lakh taka<br>
-                        <small style="color: #666; font-style: italic;">(Build house, 2 lakh taka)</small>
-                    </span>
-                </div>
-                <div style="margin: 15px 0;">
-                    <span style="background: white; padding: 12px 18px; border-radius: 18px 18px 18px 4px; display: inline-block;">
-                        বুঝেছি। হিসাব করি:<br>
-                        🏠 লক্ষ্য: ২ লক্ষ টাকা<br>
-                        💰 মাসিক: ৫,০০০ টাকা<br>
-                        📅 সময়: ৪০ মাস
-                    </span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Innovation Box -->
-        <div style="flex: 1;">
-            <div style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                <h3 style="color: #667eea; margin-bottom: 20px;">🎯 The Innovation</h3>
-                <div style="margin: 15px 0; padding: 10px; background: #F8F9FA; border-radius: 10px;">
-                    <span style="font-size: 1.2em;">🗣️</span> Accepts romanized text, voice notes
-                </div>
-                <div style="margin: 15px 0; padding: 10px; background: #F8F9FA; border-radius: 10px;">
-                    <span style="font-size: 1.2em;">🔤</span> Bengali, Tamil, Hindi + English mix
-                </div>
-                <div style="margin: 15px 0; padding: 10px; background: #F8F9FA; border-radius: 10px;">
-                    <span style="font-size: 1.2em;">📝</span> Responds in proper native script
-                </div>
-                <div style="margin-top: 25px; padding: 20px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 10px; text-align: center; color: white;">
-                    <div style="font-size: 2.5em; font-weight: bold;">xx%? to clarify</div>
-                    <div>prefer mother tongue for money decisions</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="language-insight" style="margin-top: 30px;">
-        💡 <strong>Key Insight:</strong> Proper script = <strong>RESPECT</strong> and <strong>TRUST</strong>
-    </div>
-</div>
-        <!-- Slide 7: The Impact -->
-        <div class="slide" id="slide7">
-            <h2 class="impact-title">From Generic to Personal</h2>
+            <h2 class="impact-title">Three Transformations</h2>
+            <div class="evolution-subtitle">From "Know-It-All" → "Curious Student" → "Respectful Guide"</div>
             <div class="impact-comparison">
                 <div class="impact-column before-column">
-                    <h3>❌ BEFORE</h3>
-                    <div class="impact-item">"Save 20% of your income"</div>
-                    <div class="impact-item">One-size-fits-all</div>
-                    <div class="impact-item">Western models</div>
-                    <div class="impact-item">Deleted within days</div>
+                    <h3>❌ GENERIC ADVICE</h3>
+                    <div class="impact-item" data-delay="500">"Save 20% of your income"</div>
+                    <div class="impact-item" data-delay="1000">One-size-fits-all</div>
+                    <div class="impact-item" data-delay="1500">Western financial models</div>
+                    <div class="impact-item" data-delay="2000">Deleted within days</div>
                 </div>
                 <div class="impact-column after-column">
-                    <h3>✅ AFTER</h3>
-                    <div class="impact-item">"You're 28% toward your motorcycle"</div>
-                    <div class="impact-item">Dream-focused</div>
-                    <div class="impact-item">Collectivist frameworks</div>
-                    <div class="impact-item">Actually used</div>
+                    <h3>✅ PERSONAL GUIDANCE</h3>
+                    <div class="impact-item" data-delay="500">"You're 28% toward your motorcycle"</div>
+                    <div class="impact-item" data-delay="1000">Aspiration-focused</div>
+                    <div class="impact-item" data-delay="1500">Collectivist frameworks</div>
+                    <div class="impact-item" data-delay="2000">Actually used daily</div>
                 </div>
             </div>
             <div class="impact-tagline">
-                The chatbot becomes a partner, not a lecturer
+                The chatbot becomes a partner in reaching goals, not a lecturer
+            </div>
+        </div>
+
+        <!-- SLIDE 6: LANGUAGE DEMO (Panel Discussion - Arif's insight) -->
+        <div class="slide" id="slide5">
+            <h2 class="panel-title">The Language Asymmetry Insight</h2>
+            
+            <div class="language-demo-container">
+                <div class="language-example">
+                    <h4>❌ WHAT WE BUILT</h4>
+                    <div class="language-text" style="font-style: italic;">User types: "ami taka save korbo"<br>(mixed Bengali-English)</div>
+                    <div class="language-text" style="font-style: italic;">Bot responds: "ami taka save korbo"<br>(same mixed style)</div>
+                    <p style="margin-top: 15px; text-align: center; color: #e74c3c; font-weight: 600;">❌ Workers felt uncomfortable</p>
+                </div>
+                
+                <div class="language-example">
+                    <h4>✅ WHAT THEY NEEDED</h4>
+                    <div class="language-text" style="font-style: italic;">User types: "ami taka save korbo"<br>(mixed - it's fast)</div>
+                    <div class="language-text" style="font-style: italic; direction: rtl;">Bot responds: "আপনি টাকা সঞ্চয় করতে পারেন"<br>(proper Bengali script)</div>
+                    <p style="margin-top: 15px; text-align: center; color: #27ae60; font-weight: 600;">✓ "It feels more respectful"</p>
+                </div>
+            </div>
+            
+            <div class="insight-box">
+                <p style="margin-bottom: 12px;"><strong>"When I type, I mix because it's fast. But when I read about my money, I want to see my language properly. It feels more respectful."</strong></p>
+                <p style="margin-bottom: 12px;">— Migrant worker feedback</p>
+                <p style="font-weight: 600; color: #2C3E50;">The lesson: Convenience and respect operate on different axes. Money is personal. Advice about your $600-800 salary deserves proper script, not romanized shortcuts.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: TECHNICAL SAFEGUARDS (Panel Discussion) -->
+        <div class="slide" id="slide6">
+            <h2 class="safeguards-title">Technical Safeguards for Responsible AI</h2>
+            
+            <div class="safeguards-grid">
+                <div class="safeguard-card">
+                    <h4>🛡️ Human-in-the-Loop</h4>
+                    <div class="stat">99.5% vs 92%</div>
+                    <p>Human oversight improves accuracy by 7.5 percentage points - critical for workers with $16K debt on $600-800 monthly income</p>
+                </div>
+                
+                <div class="safeguard-card">
+                    <h4>📚 RAG + Multi-Source Verification</h4>
+                    <p>Retrieval-Augmented Generation from verified sources: MAS MoneySense, MOM guidelines, World Bank data</p>
+                    <div class="stat" style="font-size: 1.3em; margin-top: 10px;">40-60% error reduction</div>
+                </div>
+                
+                <div class="safeguard-card">
+                    <h4>⚠️ The Reality Check</h4>
+                    <div class="stat">41%</div>
+                    <p>LLMs hallucinate in up to 41% of finance queries. That's why we need defense-in-depth: RAG + verification + confidence scoring + human oversight</p>
+                </div>
+                
+                <div class="safeguard-card">
+                    <h4>🎯 90% Confidence Threshold</h4>
+                    <p>Below 90% confidence = human review required. For critical decisions (debt restructuring), always human verification regardless of confidence</p>
+                </div>
+            </div>
+            
+            <div style="background: #fff3cd; padding: 20px; border-radius: 15px; border-left: 5px solid #ffc107; margin-top: 25px; text-align: center;">
+                <p style="font-size: 1.2em; color: #856404; font-weight: 600;">You cannot engineer your way past cultural context. Every technical choice either includes or excludes.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: MULTI-PLATFORM STRATEGY (Panel Discussion) -->
+        <div class="slide" id="slide7">
+            <h2 class="platform-title">Meeting Users Where They Are</h2>
+            
+            <div class="platform-container">
+                <div class="platform-box">
+                    <div class="platform-icon">💬</div>
+                    <h4>WhatsApp</h4>
+                    <p>"How we talk to family"</p>
+                    <p style="margin-top: 15px; font-weight: 600; color: #667eea;">Universal adoption<br>Maximum reach</p>
+                </div>
+                
+                <div class="platform-box">
+                    <div class="platform-icon">✈️</div>
+                    <h4>Telegram</h4>
+                    <p>"Better interface, buttons"</p>
+                    <p style="margin-top: 15px; font-weight: 600; color: #667eea;">Enhanced UX<br>Faster iteration</p>
+                </div>
+            </div>
+            
+            <div class="platform-strategy">
+                <h4>The Pragmatic Approach</h4>
+                <p>Focus group testing (6 workers) showed strong preference for Telegram's ease of use, BUT WhatsApp reaches more people. The lesson: support multiple platforms even with different technical constraints.</p>
+                <p style="margin-top: 15px; font-weight: 600;">Meet users where they are, not where we want them to be.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 9: NEXT STEPS & PANEL INFO -->
+        <div class="slide" id="slide8">
+            <h2 class="next-title">Let's Continue the Conversation</h2>
+            
+            <div class="journey-container">
+                <div class="journey-step">
+                    <div class="step-circle">✓</div>
+                    <div class="step-label">Research</div>
+                    <div class="step-desc">6 months<br>12 workers</div>
+                </div>
+                <div class="arrow-between">→</div>
+                <div class="journey-step">
+                    <div class="step-circle">✓</div>
+                    <div class="step-label">Co-create</div>
+                    <div class="step-desc">Built WITH<br>not FOR</div>
+                </div>
+                <div class="arrow-between">→</div>
+                <div class="journey-step">
+                    <div class="step-circle">✓</div>
+                    <div class="step-label">Prototype</div>
+                    <div class="step-desc">MVP tested<br>& validated</div>
+                </div>
+                <div class="arrow-between">→</div>
+                <div class="journey-step">
+                    <div class="step-circle next">?</div>
+                    <div class="step-label">Partner?</div>
+                    <div class="step-desc">Scale together<br>Create impact</div>
+                </div>
+            </div>
+
+            <div class="panel-box">
+                <h3>📣 Join our panel discussion:</h3>
+                <p>"What Migrant Workers Taught Us About Building Chatbots"</p>
+                <div class="panel-details">
+                    <strong>Panelists:</strong> Gigi Foo & Alexander Tsai (Researchers) • Selvan (Community Partner)<br>
+                    <strong>Moderated by:</strong> Andrew Koh
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Slide 8: Panel Discussion Setup -->
-<!-- Slide 8: Panel Discussion Setup -->
-<div class="slide" id="slide8">
-    <div style="background: white; height: 100%;">
-        <h2 style="font-size: 2.5em; color: #2C3E50; text-align: center; margin-bottom: 40px; padding-top: 20px;">Let's Continue the Conversation</h2>
-        
-        <!-- Journey So Far -->
-        <div style="display: flex; justify-content: center; margin-bottom: 40px;">
-            <div style="display: flex; align-items: center; gap: 30px;">
-                <div style="text-align: center;">
-                    <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">
-                        <span style="font-size: 2em; color: white;">1</span>
-                    </div>
-                    <strong style="color: #667eea;">Research</strong><br>
-                    <small>3 months<br>12 workers</small>
-                </div>
-                <div style="color: #667eea; font-size: 2em;">→</div>
-                <div style="text-align: center;">
-                    <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">
-                        <span style="font-size: 2em; color: white;">2</span>
-                    </div>
-                    <strong style="color: #667eea;">Co-create</strong><br>
-                    <small>Built WITH<br>not FOR</small>
-                </div>
-                <div style="color: #667eea; font-size: 2em;">→</div>
-                <div style="text-align: center;">
-                    <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">
-                        <span style="font-size: 2em; color: white;">3</span>
-                    </div>
-                    <strong style="color: #667eea;">Prototype</strong><br>
-                    <small>MVP ready<br>for testing</small>
-                </div>
-                <div style="color: #667eea; font-size: 2em;">→</div>
-                <div style="text-align: center;">
-                    <div style="width: 80px; height: 80px; border-radius: 50%; background: #FFF9C4; border: 3px solid #667eea; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">
-                        <span style="font-size: 2em; color: #667eea;">?</span>
-                    </div>
-                    <strong style="color: #667eea;">Next?</strong><br>
-                    <small>Let's discuss<br>together</small>
-                </div>
-            </div>
-        </div>
-
-        <!-- Key Insights to Discuss -->
-        <div style="background: linear-gradient(135deg, #E3F2FD, #F3E5F5); padding: 30px; border-radius: 20px; margin-bottom: 30px;">
-            <h3 style="color: #2C3E50; margin-bottom: 25px; font-size: 1.4em;">Three Surprising Insights to Explore:</h3>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-                <div style="background: white; padding: 20px; border-radius: 12px;">
-                    <div style="font-size: 1.8em; margin-bottom: 10px;">🎭</div>
-                    <strong style="color: #667eea;">The Script Paradox</strong><br>
-                    <small>Workers type casually but want responses in formal native script for respect</small>
-                </div>
-                <div style="background: white; padding: 20px; border-radius: 12px;">
-                    <div style="font-size: 1.8em; margin-bottom: 10px;">📊</div>
-                    <strong style="color: #667eea;">Same Workplace, Different Worlds</strong><br>
-                    <small>Two workers at SMU had vastly different financial realities</small>
-                </div>
-                <div style="background: white; padding: 20px; border-radius: 12px;">
-                    <div style="font-size: 1.8em; margin-bottom: 10px;">🔐</div>
-                    <strong style="color: #667eea;">Trust vs Privacy</strong><br>
-                    <small>Workers want personalization but fear data misuse</small>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Panel Transition -->
-        <div style="text-align: center; padding: 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 15px;">
-            <div style="font-size: 1.8em; margin-bottom: 10px;">Join our panel discussion:</div>
-            <strong style="font-size: 1.4em;">"Peaks and Troughs Towards the Wider Community"</strong>
-            <div style="margin-top: 15px; opacity: 0.9;">
-                <strong>Panelists:</strong> Caroline & Alex (Researchers) • Selvan (Community Partner)<br>
-                <strong>Moderated by:</strong> Andrew
-            </div>
-        </div>
-    </div>
-</div>
     <!-- Navigation Controls -->
     <div class="nav-controls">
         <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
         <div class="slide-counter">
-            <span id="currentSlide">1</span> / <span id="totalSlides">8</span>
+            <span id="currentSlide">1</span> / <span id="totalSlides">9</span>
         </div>
         <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
     </div>
@@ -1017,18 +1273,70 @@
 
         document.getElementById('totalSlides').textContent = totalSlides;
 
+        // Animation timers
+        let animationTimers = [];
+
+        function clearAnimationTimers() {
+            animationTimers.forEach(timer => clearTimeout(timer));
+            animationTimers = [];
+        }
+
         function showSlide(n) {
+            clearAnimationTimers();
+            
             slides.forEach(slide => slide.classList.remove('active'));
             
             if (n >= totalSlides) currentSlide = 0;
             if (n < 0) currentSlide = totalSlides - 1;
             
-            slides[currentSlide].classList.add('active');
+            const currentSlideElement = slides[currentSlide];
+            currentSlideElement.classList.add('active');
             document.getElementById('currentSlide').textContent = currentSlide + 1;
             
             // Update button states
             document.getElementById('prevBtn').disabled = currentSlide === 0;
             document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+
+            // Trigger animations for specific slides
+            if (currentSlideElement.id === 'slide3') {
+                animateChatMessages();
+                animateFeatures();
+            } else if (currentSlideElement.id === 'slide4') {
+                animateImpactItems();
+            }
+        }
+
+        function animateChatMessages() {
+            const messages = document.querySelectorAll('#slide3 .message');
+            messages.forEach((msg, index) => {
+                const delay = msg.getAttribute('data-delay') || 0;
+                const timer = setTimeout(() => {
+                    msg.classList.add('visible');
+                }, delay);
+                animationTimers.push(timer);
+            });
+        }
+
+        function animateFeatures() {
+            const features = document.querySelectorAll('#slide3 .feature-item');
+            features.forEach((feature, index) => {
+                const delay = feature.getAttribute('data-delay') || 0;
+                const timer = setTimeout(() => {
+                    feature.classList.add('visible');
+                }, delay);
+                animationTimers.push(timer);
+            });
+        }
+
+        function animateImpactItems() {
+            const items = document.querySelectorAll('#slide4 .impact-item');
+            items.forEach((item, index) => {
+                const delay = item.getAttribute('data-delay') || 0;
+                const timer = setTimeout(() => {
+                    item.classList.add('visible');
+                }, delay);
+                animationTimers.push(timer);
+            });
         }
 
         function changeSlide(n) {
@@ -1060,35 +1368,12 @@
         });
 
         function handleSwipe() {
-            if (touchEndX < touchStartX - 50) changeSlide(1);  // Swipe left
-            if (touchEndX > touchStartX + 50) changeSlide(-1); // Swipe right
+            if (touchEndX < touchStartX - 50) changeSlide(1);
+            if (touchEndX > touchStartX + 50) changeSlide(-1);
         }
 
         // Initialize
         showSlide(0);
-
-        // Animate chat messages on slide 3
-        let messageIndex = 0;
-        const messages = document.querySelectorAll('#slide3 .message');
-        
-        function animateChat() {
-            if (!slides[2].classList.contains('active')) return;
-            
-            messages.forEach((msg, i) => {
-                setTimeout(() => {
-                    msg.style.display = 'block';
-                }, i * 800);
-            });
-        }
-
-        // Watch for slide 3 becoming active
-        const observer = new MutationObserver(() => {
-            if (slides[2].classList.contains('active')) {
-                animateChat();
-            }
-        });
-
-        observer.observe(slides[2], { attributes: true, attributeFilter: ['class'] });
     </script>
 </body>
 </html>
